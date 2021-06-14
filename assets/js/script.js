@@ -7,6 +7,7 @@ const submit = document.getElementById("submit");
 submit.addEventListener("click", searchApi);
 
 var globalCities = [];
+var filteredCities = [];
 
 fetch(`https://www.trackcorona.live/api/cities`)
   .then((response) => response.json())
@@ -20,43 +21,52 @@ fetch(`https://www.trackcorona.live/api/cities`)
 
 function searchApi(event) {
   event.preventDefault();
-  const search = document.getElementById("search").value;
-  console.log(search);
+  const search = document.getElementById("search").value.toLowerCase().trim();
+  filteredCities = globalCities.filter(
+    (city) =>
+      city.location.toLowerCase().search(search) > -1 &&
+      city.country_code === "us"
+  );
+  console.log(filteredCities);
+  for (let i = 0; i < filteredCities.length; i++) {
+    var cases = filteredCities[i].confirmed;
+    var dead = filteredCities[i].dead;
+    var latitude = filteredCities[i].latitude;
+    var longitude = filteredCities[i].longitude;
+    var location = filteredCities[i].location;
 
-  fetch(`https://www.trackcorona.live/api/provinces/${search}`)
-    .then((response) => response.json())
-    .then((response) => {
-      console.log(response.data[0]);
+    myMap.setView([latitude, longitude], 8);
 
-      const latitude = response.data[0].latitude;
-      const longitude = response.data[0].longitude;
-      myMap.setView([latitude, longitude], 8);
+    L.tileLayer(
+      `https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${token}`,
+      {
+        attribution:
+          'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: "mapbox/streets-v11",
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: token,
+      }
+    ).addTo(myMap);
 
-      L.tileLayer(
-        `https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${token}`,
-        {
-          attribution:
-            'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-          maxZoom: 18,
-          id: "mapbox/streets-v11",
-          tileSize: 512,
-          zoomOffset: -1,
-          accessToken: token,
-        }
-      ).addTo(myMap);
+    var circle = L.circle([latitude, longitude], {
+      color: "red",
+      fillColor: "#f03",
+      fillOpacity: 0.5,
+      radius: 8000,
+    }).addTo(myMap);
 
-      var circle = L.circle([latitude, longitude], {
-        color: "red",
-        fillColor: "#f03",
-        fillOpacity: 0.5,
-        radius: 100000,
-      }).addTo(myMap);
+    circle.bindPopup(
+      "<span class='stateName'>" +
+        location +
+        "</span><hr>Confirmed cases " +
+        cases +
+        "<br>Death " +
+        dead
+    );
+  }
 
-      circle.bindPopup(
-        "<span class='stateName'>" +
-          response.data[0].location +
-          "</span><br>Confirmed cases " +
-          response.data[0].confirmed
-      );
-    });
+  // const latitude = response.data[0].latitude;
+  // const longitude = response.data[0].longitude;
 }
