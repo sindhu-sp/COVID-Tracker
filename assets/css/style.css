@@ -1,3 +1,8 @@
 #mapid {
   height: 600px;
 }
+
+.stateName {
+  font-size: larger;
+  font-weight: bolder;
+}
