@@ -47,15 +47,64 @@ var saveInLocalStorage =function(state){
     // Display recently searched states 
     displayButtons();   
 }
+
 // Display the city's current weather details 
 var displayCovidData= function(chosenStateName, data) 
 {
     if (data.length === 0) {
-        stateSelectedEl.textContent = "Could not obtain information.";
+        staeSelectedEl.textContent = "Could not obtain data";
         return;
-//     } 
-/
-    
+} 
+var thisDate =data.lastUpdatedDate;
+    // console.log(data.population);
+    // console.log(data.actuals.cases)
+    // console.log(data.actuals.positiveTests)//  tested positive not neccessarily admitted -
+    // console.log(data.actuals.vaccinationsInitiated) 
+    // console.log(data.actuals.vaccinesAdministered);
+    // console.log(data.actuals.vaccinationsCompleted)
+    // console.log (data.actuals.newCases) //Daily new cases is the number of new COVID cases per day per unit of population 100k
+    // console.log(data.riskLevels.infectionRate) //Infection rate is the estimated number of new people each COVID-positive person will infect
+    console.log(data.url);
+//     console.log(data.actuals.icuBeds.capacity);
+// console.log(data.actuals.icuBeds.currentUsageCovid);
+
+stateSelectedEl.innerHTML =chosenStateName+"data as of  "+thisDate;
+
+    var covidDataContainerEl = document.querySelector("#covid-data");
+
+    var populationEl =document.createElement("li");
+    populationEl.innerHTML="Population :"+data.population; //population of the State 
+    covidDataContainerEl.appendChild(populationEl);
+
+    var positivecaseEl =document.createElement("li");
+    positivecaseEl.innerHTML="Total No of people tested positive:" + data.actuals.positiveTests; //tested positive admitted plus non -admitted cases 
+    covidDataContainerEl.appendChild(positivecaseEl);
+
+    var casesEl =document.createElement("li");
+    casesEl.innerHTML= "Cases admitted since the start:"+ data.actuals.cases // admittend in the hospital 
+    covidDataContainerEl.appendChild(casesEl);
+
+    var newcaseEl =document.createElement("li");
+    newcaseEl.innerHTML =" No of new cases today:"+ data.actuals.newCases; //Daily new cases is the number of new COVID cases per day per unit of population 100k
+    covidDataContainerEl.appendChild(newcaseEl);
+
+    var recentdeathsEl =document.createElement("li");
+    recentdeathsEl.innerHTML="Death cases today" + data.actuals.newDeaths;
+    covidDataContainerEl.appendChild(recentdeathsEl);
+
+    var vaccineEl = document.createElement("li");
+    vaccineEl.innerHTML="Vaccines administered :" + data.actuals.vaccinesAdministered; // No of people who have been vaccinated or  had their first does of vaccine.
+    covidDataContainerEl.appendChild(vaccineEl);
+
+    var icuEL = document.createElement("li");
+    icuEL.innerHTML = "No cases in ICU :"+ data.actuals.icuBeds.currentUsageCovid;
+    covidDataContainerEl.appendChild(icuEL);
+
+    var linkEl = document.createElement("a");
+    linkEl.innerHTML ="Detailed Information"
+    linkEl.setAttribute("href",data.url);
+    covidDataContainerEl.appendChild(linkEl);
+ 
 };
 var getStateInfo = function(state){
     const apiURL = "https://api.covidactnow.org/v2/state/"+state+".json?apiKey=a70af13784c14287ae753ec51cf42a65"
@@ -64,7 +113,8 @@ var getStateInfo = function(state){
     if(response.ok){
         response.json().then(function(data) {
             console.log(data);
-            var chosenStateTitle=toTitleCase(chosenStateName);
+            // var chosenStateTitle=toTitleCase(chosenStateName);
+            displayCovidData(chosenStateName,data);
             saveInLocalStorage(chosenStateName);            
                    
         });
