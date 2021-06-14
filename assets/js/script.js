@@ -2,6 +2,7 @@ var searchFormEl = document.getElementById("search-form"); // form element for h
 var stateInputEl = document.getElementById("state-name"); // user input state name 
 var buttonContainerEl =document.querySelector("#state-buttons"); // container for the serch history buttons
 var stateSelectedEl =document.querySelector("#search-state"); //  displaying the state selected in main  page 
+var covidDataContainerEl = document.querySelector("#covid-data");
 
 var chosenStateName; //variable to store state name 
 //Array of objects to store  state name in local storage 
@@ -48,29 +49,22 @@ var saveInLocalStorage =function(state){
     displayButtons();   
 }
 
-// Display the city's current weather details 
 var displayCovidData= function(chosenStateName, data) 
 {
-    if (data.length === 0) {
-        staeSelectedEl.textContent = "Could not obtain data";
+    console.log(chosenStateName);
+    if (data.length === 0 || chosenStateName == "null"|| chosenStateName=="undefined") {
+        stateSelectedEl.textContent = "";
         return;
 } 
-var thisDate =data.lastUpdatedDate;
-    // console.log(data.population);
-    // console.log(data.actuals.cases)
-    // console.log(data.actuals.positiveTests)//  tested positive not neccessarily admitted -
-    // console.log(data.actuals.vaccinationsInitiated) 
-    // console.log(data.actuals.vaccinesAdministered);
-    // console.log(data.actuals.vaccinationsCompleted)
-    // console.log (data.actuals.newCases) //Daily new cases is the number of new COVID cases per day per unit of population 100k
     // console.log(data.riskLevels.infectionRate) //Infection rate is the estimated number of new people each COVID-positive person will infect
-    console.log(data.url);
-//     console.log(data.actuals.icuBeds.capacity);
-// console.log(data.actuals.icuBeds.currentUsageCovid);
+   
+    while(covidDataContainerEl.lastChild != null) {
+        covidDataContainerEl.removeChild(covidDataContainerEl.lastChild);
+        } // remove previous  children 
 
-stateSelectedEl.innerHTML =chosenStateName+"data as of  "+thisDate;
+    var thisDate =data.lastUpdatedDate;
 
-    var covidDataContainerEl = document.querySelector("#covid-data");
+    stateSelectedEl.innerHTML =chosenStateName+ " Last updated: "+ thisDate;
 
     var populationEl =document.createElement("li");
     populationEl.innerHTML="Population :"+data.population; //population of the State 
@@ -107,6 +101,8 @@ stateSelectedEl.innerHTML =chosenStateName+"data as of  "+thisDate;
  
 };
 var getStateInfo = function(state){
+    if ( state != "undefined" ){
+    
     const apiURL = "https://api.covidactnow.org/v2/state/"+state+".json?apiKey=a70af13784c14287ae753ec51cf42a65"
     fetch(apiURL)
     .then(function(response) {
@@ -114,8 +110,8 @@ var getStateInfo = function(state){
         response.json().then(function(data) {
             console.log(data);
             // var chosenStateTitle=toTitleCase(chosenStateName);
-            displayCovidData(chosenStateName,data);
-            saveInLocalStorage(chosenStateName);            
+            displayCovidData(state,data);
+            saveInLocalStorage(state);            
                    
         });
     }
@@ -128,6 +124,7 @@ var getStateInfo = function(state){
      .catch(function(error) {
         alert("Unable to connect");
       }) ;
+    }
 }
 // Event handler when user submits the state name     
 var formSubmitHandler = function(event) {
@@ -147,11 +144,13 @@ searchFormEl.addEventListener("submit",formSubmitHandler);
 // History button clicks handlers
 var buttonClickHandler =function (event){
     event.preventDefault();
+    console.log(event.target);
     event.target.getAttribute("innerHTML");
     let i= 0;
     while (i<stateNameArr.length){
-    if (event.target.innerHTML ===stateNameArr[i]) //check if the event.target element name matches with state name in Local storage, 
-       { var stateClicked = stateNameArr[i] ;
+    if (event.target.innerHTML == stateNameArr[i]) //check if the event.target element name matches with state name in Local storage, 
+       { var stateClicked = event.target.innerHTML ;
+        console.log(stateClicked);
         getStateInfo(stateClicked); //get the state  info and display
         break;   
       }
@@ -163,7 +162,7 @@ buttonContainerEl.addEventListener("click", buttonClickHandler);  //Eventlistene
 const TO_NAME = 1;
 const TO_ABBREVIATED = 2;
 
-function convertRegion(input, to) {
+function convertNames(input, to) {
     var states = [
         ['Alabama', 'AL'],
         ['Alaska', 'AK'],
@@ -217,7 +216,6 @@ function convertRegion(input, to) {
         ['South Dakota', 'SD'],
         ['Tennessee', 'TN'],
         ['Texas', 'TX'],
-        ['US Virgin Islands', 'VI'],
         ['Utah', 'UT'],
         ['Vermont', 'VT'],
         ['Virginia', 'VA'],
