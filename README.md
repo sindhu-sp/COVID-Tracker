@@ -37,4 +37,4 @@ https://deeparkrish.github.io/COVID-Tracker/
 ## Contribution
 Made with ❤️ by
 
-The website is designed using HTML and Javascript and styled using CSS..
+T
