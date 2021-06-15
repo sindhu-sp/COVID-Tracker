@@ -537,3 +537,12 @@ color: whitesmoke;
 font-style: italic;
 font-size:.5em ;
 }
+#mapid {
+  height: 70vh;
+  width: 70%;
+}
+
+.stateName {
+  font-size: larger;
+  font-weight: bolder;
+}

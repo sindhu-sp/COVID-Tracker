@@ -23,6 +23,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
 
     <link rel="stylesheet" href="./assets/css/style1.css" />
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""
+  />
+
+  <script
+    src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""
+  ></script>
+
     <title>Document</title>
 </head>
 <body class="flex-column min-100-vh" onload="displayButtons();">
@@ -55,12 +68,7 @@
             </div>
   <!-- END OF SIDE BAR  -->
             <div class="col-12 col-md-8 flex-column  justify-space-between">     
-            <div class = "  jumbotron row">
-
-
-
-            </div>
-                
+            <div id="mapid"></div>                
                 
                 
                 

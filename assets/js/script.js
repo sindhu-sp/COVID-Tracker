@@ -125,6 +125,7 @@ var getStateInfo = function(state){
         alert("Unable to connect");
       }) ;
     }
+    return;
 }
 // Event handler when user submits the state name     
 var formSubmitHandler = function(event) {
@@ -134,11 +135,24 @@ var formSubmitHandler = function(event) {
     chosenStateName.toUpperCase();
     console.log(chosenStateName);
     if (chosenStateName) {    
-        getStateInfo(chosenStateName) ;
+        var convertedName = convertNames(chosenStateName,TO_NAME);
+        if(convertedName == null) {
+        convertedName = convertNames(chosenStateName, TO_ABBREVIATED);
+         console.log(convertedName);
+         searchApi(chosenStateName);
+        getStateInfo(convertedName);
+       }
+       else {
+         searchApi(convertedName);
+         console.log(chosenStateName);
+         getStateInfo(chosenStateName); 
+       }
+       console.log(convertedName);
         stateInputEl.value = ""; 
       } else {
         alert("Please enter a state name");
       }
+      return;
   };
 searchFormEl.addEventListener("submit",formSubmitHandler); 
 // History button clicks handlers
@@ -151,7 +165,19 @@ var buttonClickHandler =function (event){
     if (event.target.innerHTML == stateNameArr[i]) //check if the event.target element name matches with state name in Local storage, 
        { var stateClicked = event.target.innerHTML ;
         console.log(stateClicked);
-        getStateInfo(stateClicked); //get the state  info and display
+        var convertedName = convertNames(stateClicked,TO_NAME);
+       if(convertedName == null) {
+          convertedName = convertNames(stateClicked, TO_ABBREVIATED);
+           searchApi(stateClicked);
+           getStateInfo(convertedName);
+        }
+        else {
+          searchApi(convertedName);
+          getStateInfo(stateClicked); 
+        }
+        console.log(convertedName);
+
+        //get the state  info and display
         break;   
       }
       i++;
@@ -225,7 +251,7 @@ function convertNames(input, to) {
         ['Wyoming', 'WY'],
     ];
 
-    var regions = states.concat(provinces);
+    var regions = states.concat(states);
 
     var i; // Reusable loop variable
     if (to == TO_ABBREVIATED) {
@@ -243,4 +269,80 @@ function convertNames(input, to) {
             }
         }
     }
+    return null;
+}
+
+var token =
+  "pk.eyJ1Ijoia2lsbGJlZXZvbDIiLCJhIjoiY2twdndpanZ0MHltZjJ2b2lhNmp3Y2k3cCJ9.ZxtIFLMKwODb0Cp2ZfIcDw";
+
+var myMap = L.map("mapid");
+const submit = document.getElementById("submit");
+
+//submit.addEventListener("click", searchApi);
+
+var globalCities = [];
+var filteredCities = [];
+
+fetch(`https://www.trackcorona.live/api/cities`)
+  .then((response) => response.json())
+  .then((response) => {
+    var data = response.data;
+
+    for (let i = 0; i < data.length; i++) {
+      globalCities.push(data[i]);
+    }
+  });
+
+var searchApi = function (state) {
+  //event.preventDefault();
+  const search = state.toLowerCase().trim();
+  filteredCities = globalCities.filter(
+    (city) =>
+      city.location.toLowerCase().search(search) > -1 &&
+      city.country_code === "us"
+  );
+  console.log(filteredCities);
+  for (let i = 0; i < filteredCities.length; i++) {
+    var cases = filteredCities[i].confirmed;
+    var dead = filteredCities[i].dead;
+    var latitude = filteredCities[i].latitude;
+    var longitude = filteredCities[i].longitude;
+    var location = filteredCities[i].location;
+
+    myMap.setView([latitude, longitude], 8);
+
+    L.tileLayer(
+      `https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${token}`,
+      {
+        attribution:
+          'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: "mapbox/streets-v11",
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: token,
+      }
+    ).addTo(myMap);
+
+    var circle = L.circle([latitude, longitude], {
+      color: "red",
+      fillColor: "#f03",
+      fillOpacity: 0.5,
+      radius: 8000,
+    }).addTo(myMap);
+
+    circle.bindPopup(
+      "<span class='stateName'>" +
+        location +
+        "</span><hr>Confirmed cases " +
+        cases +
+        "<br>Death " +
+        dead
+    );
+  }
+
+  // const latitude = response.data[0].latitude;
+  // const longitude = response.data[0].longitude;
+  return;
+  
 }
