@@ -1,6 +1,9 @@
-## Objective: 
-
+COVID-Tracker
+## Objective 
 This project is to build an app that provides the current covid data, of  any US name that an end user selects.
+
+
+
 The following things are incorporated in this application:
 * This website will help the user to search their location and know ahead of time the present covid situation. 
 * This covid tracker is provided with a modal input form where the user can input a state of his choice 
