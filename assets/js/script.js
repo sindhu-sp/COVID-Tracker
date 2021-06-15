@@ -21,12 +21,12 @@ L.tileLayer(
 // EventListener for form submit -> run searchApi function
 submit.addEventListener("click", searchApi);
 
-// creating variables for storing data
+// create variables for storing data
 const globalCities = [];
 let filteredCities = [];
 let markers = [];
 
-// Getting information for cities worldwide
+// Get information for cities worldwide
 fetch(`https://www.trackcorona.live/api/cities`)
   .then((response) => response.json())
   .then((response) => {
@@ -41,7 +41,7 @@ fetch(`https://www.trackcorona.live/api/cities`)
 function searchApi(event) {
   // prevent default actions
   event.preventDefault();
-  // Grabs text value, convert to lowercase and removes whitespace from both ends.
+  // Grab text value, convert to lowercase and removes whitespace from both ends.
   const search = document.getElementById("search").value.toLowerCase().trim();
   // filtering globalCities for search results and storing into filteredCities
   filteredCities = globalCities.filter(
@@ -66,7 +66,7 @@ function searchApi(event) {
     var location = filteredCities[i].location;
 
     myMap.setView([latitude, longitude], 5);
-    // creating circles markers to place on map of searched city
+    // create circles markers to place on map of searched city
     var circle = L.circle([latitude, longitude], {
       color: "red",
       fillColor: "#f03",
