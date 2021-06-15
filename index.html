@@ -4,30 +4,28 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="stylesheet" href="assets/css/style.css" />
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
       integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
       crossorigin=""
     />
-
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script
       src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
       integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
       crossorigin=""
     ></script>
-
-    <title>Document</title>
+    <title>COVID Tracker</title>
   </head>
+
   <body>
     <div id="mapid"></div>
-    <form>
+    <form id="mapForm">
       <input id="search" type="text" />
-      <input id="submit" type="submit" value="search" />
+      <input id="submit" type="submit" />
     </form>
   </body>
-
   <script src="assets/js/script.js"></script>
 </html>
