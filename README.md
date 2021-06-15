@@ -24,6 +24,7 @@ The following things are incorporated in this application:
 
 ## Flow diagram 
 ## Wireframe
+![WireFrame](https://github.com/Deeparkrish/COVID-Tracker/blob/main/assets/img/wireframe.png)
 ## Pseudocode
 ![Webpage](https://github.com/Deeparkrish/COVID-Tracker/blob/main/assets/img/img2.jpg)
 ![Webpage](https://github.com/Deeparkrish/COVID-Tracker/blob/main/assets/img/img1.jpg)
