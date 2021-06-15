@@ -29,7 +29,9 @@ The following things are incorporated in this application:
 * Getting an interactive map to work and integrating with the individual modules of the project
 * Time constraint 
 
-Future Enhancements:
-
+## Future Enhancements
+## Built with
+## Website
+## Contribution
 
 The website is designed using HTML and Javascript and styled using CSS..
