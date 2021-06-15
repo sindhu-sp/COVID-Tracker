@@ -66,31 +66,31 @@ var displayCovidData= function(chosenStateName, data)
 
     stateSelectedEl.innerHTML =chosenStateName+ " Last updated: "+ thisDate;
 
-    var populationEl =document.createElement("li");
+    var populationEl =document.createElement("p");
     populationEl.innerHTML="Population :"+data.population; //population of the State 
     covidDataContainerEl.appendChild(populationEl);
 
-    var positivecaseEl =document.createElement("li");
+    var positivecaseEl =document.createElement("p");
     positivecaseEl.innerHTML="Total No of people tested positive:" + data.actuals.positiveTests; //tested positive admitted plus non -admitted cases 
     covidDataContainerEl.appendChild(positivecaseEl);
 
-    var casesEl =document.createElement("li");
+    var casesEl =document.createElement("p");
     casesEl.innerHTML= "Cases admitted since the start:"+ data.actuals.cases // admittend in the hospital 
     covidDataContainerEl.appendChild(casesEl);
 
-    var newcaseEl =document.createElement("li");
+    var newcaseEl =document.createElement("p");
     newcaseEl.innerHTML =" No of new cases today:"+ data.actuals.newCases; //Daily new cases is the number of new COVID cases per day per unit of population 100k
     covidDataContainerEl.appendChild(newcaseEl);
 
-    var recentdeathsEl =document.createElement("li");
+    var recentdeathsEl =document.createElement("p");
     recentdeathsEl.innerHTML="Death cases today" + data.actuals.newDeaths;
     covidDataContainerEl.appendChild(recentdeathsEl);
 
-    var vaccineEl = document.createElement("li");
+    var vaccineEl = document.createElement("p");
     vaccineEl.innerHTML="Vaccines administered :" + data.actuals.vaccinesAdministered; // No of people who have been vaccinated or  had their first does of vaccine.
     covidDataContainerEl.appendChild(vaccineEl);
 
-    var icuEL = document.createElement("li");
+    var icuEL = document.createElement("p");
     icuEL.innerHTML = "No cases in ICU :"+ data.actuals.icuBeds.currentUsageCovid;
     covidDataContainerEl.appendChild(icuEL);
 
@@ -309,7 +309,7 @@ var searchApi = function (state) {
     var longitude = filteredCities[i].longitude;
     var location = filteredCities[i].location;
 
-    myMap.setView([latitude, longitude], 8);
+    myMap.setView([latitude, longitude], 5);
 
     L.tileLayer(
       `https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${token}`,
@@ -340,9 +340,6 @@ var searchApi = function (state) {
         dead
     );
   }
-
-  // const latitude = response.data[0].latitude;
-  // const longitude = response.data[0].longitude;
   return;
   
 }
