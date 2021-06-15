@@ -37,4 +37,4 @@ https://deeparkrish.github.io/COVID-Tracker/
 ## Contribution
 Made with ❤️ by
 
-T
+
