@@ -38,6 +38,6 @@ The following things are incorporated in this application:
 https://deeparkrish.github.io/COVID-Tracker/
 
 ## Contribution
-Made with ❤️ by
+Made with ❤️ by  Deepa Krishnan, Dyravuth Yorn, Sindhu Pillai, Timothy Sepulvada
 
 
