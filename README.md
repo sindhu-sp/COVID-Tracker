@@ -32,6 +32,9 @@ The following things are incorporated in this application:
 ## Future Enhancements
 ## Built with
 ## Website
+https://deeparkrish.github.io/COVID-Tracker/
+
 ## Contribution
+Made with ❤️ by
 
 The website is designed using HTML and Javascript and styled using CSS..
