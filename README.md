@@ -19,8 +19,9 @@ The following things are incorporated in this application:
 * The array has been represented as a Set collection, making sure even if the state is chosen multiple times,its name is saved only once in the array,
   and no duplicate buttons are created.
 * The search buttons have been added dynamically using Javascript.
-* When the user clicks on a state in the search history he is again presented with current and future conditions for that city.
+* When the user clicks on a state in the search history,he/she is presented with the current COVID statistics for that state.
 * The application is responsive and has a clean interface.
+*  An open-source JavaScript library, https://leafletjs.com/  has been used to create interactive map.
 
 ## Flow diagram 
 ![Webpage](https://github.com/Deeparkrish/COVID-Tracker/blob/main/assets/img/flowchart.jpg)
