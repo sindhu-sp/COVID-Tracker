@@ -1,4 +1,5 @@
-COVID-Tracker
+## COVID-Tracker
+
 ## Objective 
 This project is to build an app that provides the current covid data, of  any US name that an end user selects.
 
@@ -13,7 +14,7 @@ The following things are incorporated in this application:
 * He is also presented with the current covid statistics of the state as on current date.
 * The above has been accomplished using the following: 
      * fetch() to https://apidocs.covidactnow.org
-     *fetch() to 
+     * fetch() to https://www.openstreetmap.org/ and www.trackcorona.live
 * The user is also presented with a URL(obtained from fetch()) which provides the detailed covid data of that state
 * The state the user chooses is added to the search history by saving the state name in the local storage as an array to provide persistent data.
 * The array has been represented as a Set collection, making sure even if the city is chosen multiple times,its name is saved only once in the array,
@@ -23,13 +24,13 @@ The following things are incorporated in this application:
 * The application is responsive and has a clean interface.
 
 ## Flow diagram 
-![Webpage](https://github.com/Deeparkrish/COVID-Tracker/blob/main/assets/img/img1.jpg)
+![Webpage](https://github.com/Deeparkrish/COVID-Tracker/blob/main/assets/img/flowchart.jpg)
 ## Wireframe
 ![WireFrame](https://github.com/Deeparkrish/COVID-Tracker/blob/main/assets/img/wireframe.png)
 ## Pseudocode
 ![Webpage](https://github.com/Deeparkrish/COVID-Tracker/blob/main/assets/img/img2.jpg)
 ![Webpage](https://github.com/Deeparkrish/COVID-Tracker/blob/main/assets/img/img1.jpg)
-![Webpage](https://github.com/Deeparkrish/COVID-Tracker/blob/main/assets/img/img1.jpg)
+![Webpage](https://github.com/Deeparkrish/COVID-Tracker/blob/main/assets/img/mapping.jpg)
 
 ## Mockup
 ## Challenges:
@@ -39,7 +40,18 @@ The following things are incorporated in this application:
 * Time constraint 
 
 ## Future Enhancements
+## Data Endpoints 
+ *  https://apidocs.covidactnow.org
+ 
+ *  https://www.openstreetmap.org/ 
+ 
+ *  https://www.trackcorona.live
+
 ## Built with
+* HTML
+* Javascript
+* Server-side APIs
+
 ## Website
 https://deeparkrish.github.io/COVID-Tracker/
 
