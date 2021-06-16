@@ -39,6 +39,11 @@ The following things are incorporated in this application:
 * Time constraint 
 
 ## Future Enhancements
+## Data Endpoints 
+ https://apidocs.covidactnow.org
+ https://www.openstreetmap.org/ 
+ https://www.trackcorona.live
+
 ## Built with
 * HTML
 * Javascript
