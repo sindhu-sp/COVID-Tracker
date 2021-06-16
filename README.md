@@ -37,7 +37,7 @@ The following things are incorporated in this application:
 ## Challenges:
 * Initially,the project was intented to provide,the tourism information of a state of user's choice, along with the current COVID conditions 
   in that destination. A free travel API endpoint that would satify our requirment was something that was not feasible.
-* Getting an interactive map to work and integrating with the individual modules of the project.
+* Getting an interactive map to work and integrating it with the individual modules of the project required us to add additional mapping functions.
 * Time constraint 
 
 ## Future Enhancements
