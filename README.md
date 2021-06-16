@@ -7,7 +7,7 @@ This project is to build an app that provides the current covid data, of  any US
 
 The following things are incorporated in this application:
 * This website will help the user to search their location and know ahead of time the present covid situation. 
-* This covid tracker is provided with a modal input form where the user can input a state of his choice.
+* This covid tracker is provided with a modal input form where the user can input a state of his/her choice.
 * Upon validation, the user is presented with an interactive map, that of the state.
 * Pins are dropped on the counties of the state. 
 * If the user hovers on it the covid data for the particular county pops up.
@@ -59,6 +59,7 @@ The following things are incorporated in this application:
 * Javascript
 * Server-side APIs
 * https://leafletjs.com/ -An open-source JavaScript library 
+* Styling - Bulma(TBD)
 
 ## Website
 https://deeparkrish.github.io/COVID-Tracker/
