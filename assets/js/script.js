@@ -141,12 +141,12 @@ var formSubmitHandler = function(event) {
         convertedName = convertNames(chosenStateName, TO_ABBREVIATED);
          console.log(convertedName);
          searchApi(chosenStateName);
-        getStateInfo(convertedName);
+        getStateInfo(convertedName.toUpperCase());
        }
        else {
          searchApi(convertedName);
          console.log(chosenStateName);
-         getStateInfo(chosenStateName); 
+         getStateInfo(chosenStateName.toUpperCase()); 
        }
        console.log(convertedName);
         stateInputEl.value = ""; 
@@ -256,6 +256,7 @@ function convertNames(input, to) {
 
     var i; // Reusable loop variable
     if (to == TO_ABBREVIATED) {
+        input = input.toUpperCase();
         input = input.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
         for (i = 0; i < regions.length; i++) {
             if (regions[i][0] == input) {
