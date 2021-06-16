@@ -33,6 +33,7 @@ The following things are incorporated in this application:
 ![Webpage](https://github.com/Deeparkrish/COVID-Tracker/blob/main/assets/img/mapping.jpg)
 
 ## Mockup
+![Webpage](https://github.com/Deeparkrish/COVID-Tracker/blob/main/assets/img/mockup.png)
 ## Challenges:
 * Initially the project was designed for the user who wish to travel to a destination and wanting to know about the places of interested the covid restrictions 
   in that destinations, we werent able to find a feasible endpoint.
