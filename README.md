@@ -35,8 +35,8 @@ The following things are incorporated in this application:
 ## Mockup
 ![Webpage](https://github.com/Deeparkrish/COVID-Tracker/blob/main/assets/img/mockup.png)
 ## Challenges:
-* Initially the project was designed for the user who wish to travel to a destination and wanting to know about the places of interested the covid restrictions 
-  in that destinations, we werent able to find a feasible endpoint.
+* Initially,the project was intented to provide,the tourism information of a state of user's choice, along with the current COVID conditions 
+  in that destination. A free travel API endpoint that would satify our requirment was something that was not feasible.
 * Getting an interactive map to work and integrating with the individual modules of the project.
 * Time constraint 
 
