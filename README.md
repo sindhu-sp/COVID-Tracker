@@ -4,11 +4,10 @@
 This project is to build an app that provides the current covid data, of  any US State that an end user selects.
 
 
-
 The following things are incorporated in this application:
-* This website will help the user to search their location and know ahead of time the present covid situation. 
-* This covid tracker is provided with a modal input form where the user can input a state of his/her choice.
-* Upon validation, the user is presented with an interactive map, that of the state.
+
+* The covid tracker is provided with a modal input form where the user can input a state of his/her choice.
+* Upon validation of the state name, the user is presented with an interactive map, of the state.
 * Pins are dropped on the counties of the state. 
 * If the user hovers on it the covid data for the particular county pops up.
 * He is also presented with the current covid statistics of the state as on current date.
