@@ -1,7 +1,7 @@
 ## COVID-Tracker
 
 ## Objective 
-This project is to build an app that provides the current covid data, of  any US name that an end user selects.
+This project is to build an app that provides the current covid data, of  any US State that an end user selects.
 
 
 
