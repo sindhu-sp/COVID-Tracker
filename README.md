@@ -13,7 +13,7 @@ The following things are incorporated in this application:
 * He is also presented with the current covid statistics of the state as on current date.
 * The above has been accomplished using the following: 
      * fetch() to https://apidocs.covidactnow.org
-     *fetch() to 
+     * fetch() to 
 * The user is also presented with a URL(obtained from fetch()) which provides the detailed covid data of that state
 * The state the user chooses is added to the search history by saving the state name in the local storage as an array to provide persistent data.
 * The array has been represented as a Set collection, making sure even if the city is chosen multiple times,its name is saved only once in the array,
