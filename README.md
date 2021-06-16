@@ -23,13 +23,13 @@ The following things are incorporated in this application:
 * The application is responsive and has a clean interface.
 
 ## Flow diagram 
-![Webpage](https://github.com/Deeparkrish/COVID-Tracker/blob/main/assets/img/img1.jpg)
+![Webpage](https://github.com/Deeparkrish/COVID-Tracker/blob/main/assets/img/flowchart.jpg)
 ## Wireframe
 ![WireFrame](https://github.com/Deeparkrish/COVID-Tracker/blob/main/assets/img/wireframe.png)
 ## Pseudocode
 ![Webpage](https://github.com/Deeparkrish/COVID-Tracker/blob/main/assets/img/img2.jpg)
 ![Webpage](https://github.com/Deeparkrish/COVID-Tracker/blob/main/assets/img/img1.jpg)
-![Webpage](https://github.com/Deeparkrish/COVID-Tracker/blob/main/assets/img/img1.jpg)
+![Webpage](https://github.com/Deeparkrish/COVID-Tracker/blob/main/assets/img/mapping.jpg)
 
 ## Mockup
 ## Challenges:
