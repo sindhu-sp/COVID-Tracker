@@ -16,7 +16,7 @@ The following things are incorporated in this application:
      * fetch() to https://www.openstreetmap.org/ and www.trackcorona.live
 * The user is also presented with an URL(obtained from fetch()) which provides the detailed covid data of that state
 * The state the user chooses is added to the search history, by saving the state name in the local storage in an array to provide persistent data.
-* The array has been represented as a Set collection, making sure even if the city is chosen multiple times,its name is saved only once in the array,
+* The array has been represented as a Set collection, making sure even if the state is chosen multiple times,its name is saved only once in the array,
   and no duplicate buttons are created.
 * The search buttons have been added dynamically using Javascript.
 * When the user clicks on a state in the search history he is again presented with current and future conditions for that city.
