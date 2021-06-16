@@ -6,10 +6,10 @@ This project is to build an app that provides the current covid data, of  any US
 
 The following things are incorporated in this application:
 
-* The covid tracker is provided with a modal input form where the user can input a state of his/her choice.
+* The covid tracker is provided with an input form where the user can input a state of his/her choice.
 * Upon validation of the state name, the user is presented with an interactive map of the state.
 * Pins are dropped on the counties of the state. 
-* If the user hovers on it the covid data for the particular county pops up.
+* If the user hovers/clicks on it the covid data for the particular county pops up.
 * He is also presented with the current covid statistics of the state as on current date.
 * The above has been accomplished using the following: 
      * fetch() to https://apidocs.covidactnow.org
@@ -18,10 +18,10 @@ The following things are incorporated in this application:
 * The state the user chooses is added to the search history, by saving the state name in the local storage in an array to provide persistent data.
 * The array has been represented as a Set collection, making sure even if the state is chosen multiple times,its name is saved only once in the array,
   and no duplicate buttons are created.
-* The search buttons have been added dynamically using Javascript.
+* The search  history buttons have been added dynamically using Javascript.
 * When the user clicks on a state in the search history,he/she is presented with the current COVID statistics for that state.
 * The application is responsive and has a clean interface.
-*  An open-source JavaScript library, https://leafletjs.com/  has been used to create interactive map.
+*  An open-source JavaScript library, https://leafletjs.com/  has been used to create the interactive map.
 
 ## Flow diagram 
 ![Webpage](https://github.com/Deeparkrish/COVID-Tracker/blob/main/assets/img/flowchart.jpg)
