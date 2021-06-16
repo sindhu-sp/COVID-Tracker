@@ -1,4 +1,3 @@
-COVID-Tracker
 ## COVID-Tracker
 
 ## Objective 
