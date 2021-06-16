@@ -29,7 +29,7 @@ var displayButtons = function()
     if(stateArr != null) {
     for ( let i=0;i<stateArr.length; i++){
          var buttonEl = document.createElement("button");
-            buttonEl.className ="btn";
+            buttonEl.className ="button";
         buttonEl.innerHTML =stateArr[i] ;
         buttonContainerEl.appendChild(buttonEl);
      }
@@ -334,26 +334,13 @@ var searchApi = function (state) {
     }
     // for loop adding data when clicked
   for (let i = 0; i < filteredCities.length; i++) {
-    var cases = filteredCities[i].confirmed;
-    var dead = filteredCities[i].dead;
+    var cases = filteredCities[i].confirmed || 0;
+    var dead = filteredCities[i].dead || 0;
     var latitude = filteredCities[i].latitude;
     var longitude = filteredCities[i].longitude;
     var location = filteredCities[i].location;
 
     myMap.setView([latitude, longitude], 5);
-
-    // L.tileLayer(
-    //   `https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${token}`,
-    //   {
-    //     attribution:
-    //       'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    //     maxZoom: 18,
-    //     id: "mapbox/streets-v11",
-    //     tileSize: 512,
-    //     zoomOffset: -1,
-    //     accessToken: token,
-    //   }
-    // ).addTo(myMap);
 
     // creating circles markers to place on map of searched city
     var circle = L.circle([latitude, longitude], {
