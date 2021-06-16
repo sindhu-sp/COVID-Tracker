@@ -41,6 +41,12 @@ The following things are incorporated in this application:
 * Time constraint 
 
 ## Future Enhancements
+*   The current data in  textual format could be converted into a graphical representation.
+*   The site would include the main points of interests of the chosen state that are open for public.
+*   The site would also provide latest news data of the state.
+*   More data to be displayed on the map’s pop ups.
+*   Adding a Clear button.
+
 ## Data Endpoints 
  *  https://apidocs.covidactnow.org
  
