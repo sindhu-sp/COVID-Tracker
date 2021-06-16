@@ -40,6 +40,10 @@ The following things are incorporated in this application:
 
 ## Future Enhancements
 ## Built with
+* HTML
+* Javascript
+* Server-side APIs
+
 ## Website
 https://deeparkrish.github.io/COVID-Tracker/
 
