@@ -41,7 +41,9 @@ The following things are incorporated in this application:
 ## Future Enhancements
 ## Data Endpoints 
  *  https://apidocs.covidactnow.org
+ 
  *  https://www.openstreetmap.org/ 
+ 
  *  https://www.trackcorona.live
 
 ## Built with
