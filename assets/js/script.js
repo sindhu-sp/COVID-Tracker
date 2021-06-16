@@ -67,36 +67,37 @@ var displayCovidData= function(chosenStateName, data)
     stateSelectedEl.innerHTML =chosenStateName+ " Last updated: "+ thisDate;
 
     var populationEl =document.createElement("p");
-    populationEl.innerHTML="Population :"+data.population; //population of the State 
+    populationEl.innerHTML="Population:"+data.population; //population of the State 
     covidDataContainerEl.appendChild(populationEl);
 
     var positivecaseEl =document.createElement("p");
-    positivecaseEl.innerHTML="Total No of people tested positive:" + data.actuals.positiveTests; //tested positive admitted plus non -admitted cases 
+    positivecaseEl.innerHTML="Tested Positive:" + data.actuals.positiveTests; //tested positive admitted plus non -admitted cases 
     covidDataContainerEl.appendChild(positivecaseEl);
 
     var casesEl =document.createElement("p");
-    casesEl.innerHTML= "Cases admitted since the start:"+ data.actuals.cases // admittend in the hospital 
+    casesEl.innerHTML= "Hospitalzed:"+ data.actuals.cases // admittend in the hospital 
     covidDataContainerEl.appendChild(casesEl);
 
     var newcaseEl =document.createElement("p");
-    newcaseEl.innerHTML =" No of new cases today:"+ data.actuals.newCases; //Daily new cases is the number of new COVID cases per day per unit of population 100k
+    newcaseEl.innerHTML =" New Cases:"+ data.actuals.newCases; //Daily new cases is the number of new COVID cases per day per unit of population 100k
     covidDataContainerEl.appendChild(newcaseEl);
 
     var recentdeathsEl =document.createElement("p");
-    recentdeathsEl.innerHTML="Death cases today" + data.actuals.newDeaths;
+    recentdeathsEl.innerHTML="Deaths:" + data.actuals.newDeaths;
     covidDataContainerEl.appendChild(recentdeathsEl);
 
     var vaccineEl = document.createElement("p");
-    vaccineEl.innerHTML="Vaccines administered :" + data.actuals.vaccinesAdministered; // No of people who have been vaccinated or  had their first does of vaccine.
+    vaccineEl.innerHTML="Vaccines Administered:" + data.actuals.vaccinesAdministered; // No of people who have been vaccinated or  had their first does of vaccine.
     covidDataContainerEl.appendChild(vaccineEl);
 
     var icuEL = document.createElement("p");
-    icuEL.innerHTML = "No cases in ICU :"+ data.actuals.icuBeds.currentUsageCovid;
+    icuEL.innerHTML = "ICU Cases:"+ data.actuals.icuBeds.currentUsageCovid;
     covidDataContainerEl.appendChild(icuEL);
 
     var linkEl = document.createElement("a");
-    linkEl.innerHTML ="Detailed Information"
+    linkEl.innerHTML ="Click here for more info"
     linkEl.setAttribute("href",data.url);
+    linkEl.setAttribute("class","covidinfo");
     covidDataContainerEl.appendChild(linkEl);
  
 };

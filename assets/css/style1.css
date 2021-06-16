@@ -546,3 +546,9 @@ font-size:.5em ;
   font-size: larger;
   font-weight: bolder;
 }
+#covid-data,
+.covidinfo{
+  padding:0;
+  font-weight: bold;
+  
+}
