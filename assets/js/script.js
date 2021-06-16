@@ -292,8 +292,7 @@ L.tileLayer(
     accessToken: token,
   }
 ).addTo(myMap);
-// EventListener for form submit -> run searchApi function
-//submit.addEventListener("click", searchApi);
+
 
 // creating variables for storing data
 const globalCities = [];
@@ -306,15 +305,16 @@ fetch(`https://www.trackcorona.live/api/cities`)
   .then((response) => {
     // Create a pointer
     const data = response.data;
-    // For loop to copy info to globalCities
 
+    // For loop to copy info to globalCities
     for (let i = 0; i < data.length; i++) {
       globalCities.push(data[i]);
     }
   });
+
 // Function for searching for covid data
 var searchApi = function (state) {
-  //event.preventDefault();
+
   // Grabs text value, convert to lowercase and removes whitespace from both ends.
   const search = state.toLowerCase().trim();
 
@@ -334,26 +334,13 @@ var searchApi = function (state) {
     }
     // for loop adding data when clicked
   for (let i = 0; i < filteredCities.length; i++) {
-    var cases = filteredCities[i].confirmed;
-    var dead = filteredCities[i].dead;
+    var cases = filteredCities[i].confirmed || 0;
+    var dead = filteredCities[i].dead || 0;
     var latitude = filteredCities[i].latitude;
     var longitude = filteredCities[i].longitude;
     var location = filteredCities[i].location;
 
     myMap.setView([latitude, longitude], 5);
-
-    // L.tileLayer(
-    //   `https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${token}`,
-    //   {
-    //     attribution:
-    //       'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    //     maxZoom: 18,
-    //     id: "mapbox/streets-v11",
-    //     tileSize: 512,
-    //     zoomOffset: -1,
-    //     accessToken: token,
-    //   }
-    // ).addTo(myMap);
 
     // creating circles markers to place on map of searched city
     var circle = L.circle([latitude, longitude], {
