@@ -1,20 +1,13 @@
+/* COIVD DATA FETCH FOR STATE NAME , LOCAL STORAGE AND MAPPING - DEEPA KRISHNAN */
 var searchFormEl = document.getElementById("search-form"); // form element for handling events
 var stateInputEl = document.getElementById("state-name"); // user input state name 
 var buttonContainerEl =document.querySelector("#state-buttons"); // container for the serch history buttons
 var stateSelectedEl =document.querySelector("#search-state"); //  displaying the state selected in main  page 
 var covidDataContainerEl = document.querySelector("#covid-data");
-
 var chosenStateName; //variable to store state name 
 //Array of objects to store  state name in local storage 
 var stateNameArr = JSON.parse(localStorage.getItem("state")) ||[];
-
 /* END OF  VARIABLE DECLARATION */
-//Convert the first letter of the state name to uppercase
-function toTitleCase(str) {
-    return str.replace(/\w\S*/g, function(txt){
-        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    });
-}
 
 // Display search history button 
 var displayButtons = function()
@@ -24,7 +17,6 @@ var displayButtons = function()
     while(buttonContainerEl.lastChild != null) {
     buttonContainerEl.removeChild(buttonContainerEl.lastChild);
     } // remove previous  children 
-
     // refresh the button list 
     if(stateArr != null) {
     for ( let i=0;i<stateArr.length; i++){
@@ -36,8 +28,8 @@ var displayButtons = function()
      if(stateArr.length)
         document.querySelector("#state-list").classList.remove("hide"); //display the button element container  
     }
-
 }
+
 // Save state names in Local storage 
 var saveInLocalStorage =function(state){
     if (stateNameArr.length >=5) stateNameArr.shift(); // Pop the state name  in the first index out of the array
@@ -48,22 +40,18 @@ var saveInLocalStorage =function(state){
     // Display recently searched states 
     displayButtons();   
 }
-
+//Display Data on HTML 
 var displayCovidData= function(chosenStateName, data) 
 {
-    console.log(chosenStateName);
     if (data.length === 0 || chosenStateName == "null"|| chosenStateName=="undefined") {
         stateSelectedEl.textContent = "";
         return;
-} 
-    // console.log(data.riskLevels.infectionRate) //Infection rate is the estimated number of new people each COVID-positive person will infect
-   
+}    
     while(covidDataContainerEl.lastChild != null) {
         covidDataContainerEl.removeChild(covidDataContainerEl.lastChild);
         } // remove previous  children 
 
-    var thisDate =data.lastUpdatedDate;
-
+    var thisDate =data.lastUpdatedDate; //Current date
     stateSelectedEl.innerHTML =chosenStateName+ " Last updated: "+ thisDate;
 
     var populationEl =document.createElement("p");
@@ -96,24 +84,22 @@ var displayCovidData= function(chosenStateName, data)
 
     var linkEl = document.createElement("a");
     linkEl.innerHTML ="Click here for more info"
-    linkEl.setAttribute("href",data.url);
+    linkEl.setAttribute("href",data.url); // Link to detailed report 
     linkEl.setAttribute("class","covidinfo");
     covidDataContainerEl.appendChild(linkEl);
- 
+
 };
+
+//Get the state information 
 var getStateInfo = function(state){
     if ( state != "undefined" ){
-    
     const apiURL = "https://api.covidactnow.org/v2/state/"+state+".json?apiKey=a70af13784c14287ae753ec51cf42a65"
     fetch(apiURL)
     .then(function(response) {
     if(response.ok){
         response.json().then(function(data) {
-            console.log(data);
-            // var chosenStateTitle=toTitleCase(chosenStateName);
             displayCovidData(state,data);
-            saveInLocalStorage(state);            
-                   
+            saveInLocalStorage(state);                           
         });
     }
     else {
@@ -133,39 +119,41 @@ var formSubmitHandler = function(event) {
     
     event.preventDefault(); 
     chosenStateName = stateInputEl.value.trim();
-    chosenStateName.toUpperCase();
-    console.log(chosenStateName);
-    if (chosenStateName) {    
-        var convertedName = convertNames(chosenStateName,TO_NAME);
-        if(convertedName == null) {
-        convertedName = convertNames(chosenStateName, TO_ABBREVIATED);
-         console.log(convertedName);
-         searchApi(chosenStateName);
-        getStateInfo(convertedName.toUpperCase());
-       }
-       else {
-         searchApi(convertedName);
-         console.log(chosenStateName);
-         getStateInfo(chosenStateName.toUpperCase()); 
-       }
-       console.log(convertedName);
-        stateInputEl.value = ""; 
-      } else {
-        alert("Please enter a state name");
-      }
+      chosenStateName.toUpperCase();
+      console.log(chosenStateName);
+      if (chosenStateName) {    
+          var convertedName = convertNames(chosenStateName,TO_NAME);
+  
+          if(convertedName == null) {
+            convertedName = convertNames(chosenStateName, TO_ABBREVIATED);
+            if(convertedName == null) {
+              alert("Please enter a valid state name");
+            }
+            else {
+              searchApi(chosenStateName);
+              getStateInfo(convertedName.toUpperCase());
+            }
+         }
+         else {
+          searchApi(convertedName);
+          getStateInfo(chosenStateName.toUpperCase()); 
+         }
+         stateInputEl.value = ""; 
+    } else {
+          alert("Please enter a state name");
+    }
+    
       return;
   };
 searchFormEl.addEventListener("submit",formSubmitHandler); 
 // History button clicks handlers
 var buttonClickHandler =function (event){
     event.preventDefault();
-    console.log(event.target);
     event.target.getAttribute("innerHTML");
     let i= 0;
     while (i<stateNameArr.length){
     if (event.target.innerHTML == stateNameArr[i]) //check if the event.target element name matches with state name in Local storage, 
        { var stateClicked = event.target.innerHTML ;
-        console.log(stateClicked);
         var convertedName = convertNames(stateClicked,TO_NAME);
        if(convertedName == null) {
           convertedName = convertNames(stateClicked, TO_ABBREVIATED);
@@ -176,8 +164,6 @@ var buttonClickHandler =function (event){
           searchApi(convertedName);
           getStateInfo(stateClicked); 
         }
-        console.log(convertedName);
-
         //get the state  info and display
         break;   
       }
@@ -188,7 +174,6 @@ buttonContainerEl.addEventListener("click", buttonClickHandler);  //Eventlistene
 
 const TO_NAME = 1;
 const TO_ABBREVIATED = 2;
-
 function convertNames(input, to) {
     var states = [
         ['Alabama', 'AL'],
@@ -253,6 +238,7 @@ function convertNames(input, to) {
     ];
 
     var regions = states.concat(states);
+    
 
     var i; // Reusable loop variable
     if (to == TO_ABBREVIATED) {
@@ -273,7 +259,8 @@ function convertNames(input, to) {
     }
     return null;
 }
-
+/* END OF DEEPA's CODE */
+/* CODE OF MAP STARTS HERE CODED BY - DYRAVUTH YORN */
 const token =
   "pk.eyJ1Ijoia2lsbGJlZXZvbDIiLCJhIjoiY2twdndpanZ0MHltZjJ2b2lhNmp3Y2k3cCJ9.ZxtIFLMKwODb0Cp2ZfIcDw";
 
@@ -324,7 +311,6 @@ var searchApi = function (state) {
       city.location.toLowerCase().search(search) > -1 &&
       city.country_code === "us"
   );
-  console.log(filteredCities);
     // for loop to remove markers after new search
     if (markers.length > 0) {
       for (let i = 0; i < markers.length; i++) {
