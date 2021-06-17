@@ -1,4 +1,4 @@
-/* COIVD DATA FETCH FOR STATE NAME , LOCAL STORAGE AND MAPPING - DEEPA KRISHNAN */
+/* COVID DATA FETCH FOR STATE NAME , LOCAL STORAGE AND MAPPING - DEEPA KRISHNAN */
 var searchFormEl = document.getElementById("search-form"); // form element for handling events
 var stateInputEl = document.getElementById("state-name"); // user input state name 
 var buttonContainerEl =document.querySelector("#state-buttons"); // container for the serch history buttons
@@ -15,15 +15,16 @@ var displayButtons = function()
     var stateArr= stateNameArr;
 
     while(buttonContainerEl.lastChild != null) {
+    // remove previous  children 
     buttonContainerEl.removeChild(buttonContainerEl.lastChild);
-    } // remove previous  children 
+    } 
     // refresh the button list 
     if(stateArr != null) {
     for ( let i=0;i<stateArr.length; i++){
-         var buttonEl = document.createElement("button");
+         var buttonEl = document.createElement("button"); // create a button element 
             buttonEl.className ="btn";
-        buttonEl.innerHTML =stateArr[i] ;
-        buttonContainerEl.appendChild(buttonEl);
+        buttonEl.innerHTML =stateArr[i] ; // Add the state name 
+        buttonContainerEl.appendChild(buttonEl); // append to search history button container 
      }
      if(stateArr.length)
         document.querySelector("#state-list").classList.remove("hide"); //display the button element container  
@@ -79,7 +80,7 @@ var displayCovidData= function(chosenStateName, data)
     covidDataContainerEl.appendChild(vaccineEl);
 
     var icuEL = document.createElement("p");
-    icuEL.innerHTML = "ICU Cases:"+ data.actuals.icuBeds.currentUsageCovid;
+    icuEL.innerHTML = "ICU Cases:"+ data.actuals.icuBeds.currentUsageCovid; // no of coivd patients admittedin ICU
     covidDataContainerEl.appendChild(icuEL);
 
     var linkEl = document.createElement("a");
@@ -96,15 +97,16 @@ var getStateInfo = function(state){
     const apiURL = "https://api.covidactnow.org/v2/state/"+state+".json?apiKey=a70af13784c14287ae753ec51cf42a65"
     fetch(apiURL)
     .then(function(response) {
+    // If promise is fullfilled 
     if(response.ok){
         response.json().then(function(data) {
-            displayCovidData(state,data);
-            saveInLocalStorage(state);                           
+            displayCovidData(state,data);  // Call display function to display data in HTML 
+            saveInLocalStorage(state);     // save state name in local storage                   
         });
     }
     else {
         alert(' invalid name ');   
-        document.location.replace("./index.html");
+        document.location.replace("./index.html"); // load the homepage 
         return; 
     } 
      })  
@@ -118,29 +120,31 @@ var getStateInfo = function(state){
 var formSubmitHandler = function(event) {
     
     event.preventDefault(); 
-    chosenStateName = stateInputEl.value.trim();
-      chosenStateName.toUpperCase();
-      console.log(chosenStateName);
+    chosenStateName = stateInputEl.value.trim(); // remove spaces 
+      chosenStateName.toUpperCase(); //convert to uppercase 
       if (chosenStateName) {    
-          var convertedName = convertNames(chosenStateName,TO_NAME);
-  
+          var convertedName = convertNames(chosenStateName,TO_NAME); // call function to get Abbrevation 
+          // If return value is null
           if(convertedName == null) {
-            convertedName = convertNames(chosenStateName, TO_ABBREVIATED);
+            convertedName = convertNames(chosenStateName, TO_ABBREVIATED); //call function to get statename 
+            //Check if the abbrevation returned null as well 
             if(convertedName == null) {
-              alert("Please enter a valid state name");
+              alert("Please enter a valid state name");  // If so its an invalid user input 
             }
             else {
-              searchApi(chosenStateName);
-              getStateInfo(convertedName.toUpperCase());
+              // If user input is state name 
+              searchApi(chosenStateName); // call the map function to display map with state name 
+              getStateInfo(convertedName.toUpperCase()); // call the state info with abbrevation
             }
          }
+         // if user input is  state code 
          else {
-          searchApi(convertedName);
-          getStateInfo(chosenStateName.toUpperCase()); 
+          searchApi(convertedName); // call the map function with name  converted from state code 
+          getStateInfo(chosenStateName.toUpperCase());  //call thr state info function 
          }
          stateInputEl.value = ""; 
     } else {
-          alert("Please enter a state name");
+          alert("Please enter a  valid state name"); // throw error 
     }
     
       return;
@@ -149,20 +153,21 @@ searchFormEl.addEventListener("submit",formSubmitHandler);
 // History button clicks handlers
 var buttonClickHandler =function (event){
     event.preventDefault();
-    event.target.getAttribute("innerHTML");
+    event.target.getAttribute("innerHTML"); // get the text of the button that was clicked 
     let i= 0;
     while (i<stateNameArr.length){
     if (event.target.innerHTML == stateNameArr[i]) //check if the event.target element name matches with state name in Local storage, 
        { var stateClicked = event.target.innerHTML ;
+        // do mapping to display map 
         var convertedName = convertNames(stateClicked,TO_NAME);
        if(convertedName == null) {
           convertedName = convertNames(stateClicked, TO_ABBREVIATED);
-           searchApi(stateClicked);
-           getStateInfo(convertedName);
+           searchApi(stateClicked); // get the map info of the button clicked 
+           getStateInfo(convertedName); // get the state info 
         }
-        else {
-          searchApi(convertedName);
-          getStateInfo(stateClicked); 
+        else {// If abbrevaation is saved 
+          searchApi(convertedName); //  convert to statename and call Searchapi to display map
+          getStateInfo(stateClicked);  //call stateinfo 
         }
         //get the state  info and display
         break;   
@@ -175,6 +180,7 @@ buttonContainerEl.addEventListener("click", buttonClickHandler);  //Eventlistene
 const TO_NAME = 1;
 const TO_ABBREVIATED = 2;
 function convertNames(input, to) {
+  // array of array used to map state name and code 
     var states = [
         ['Alabama', 'AL'],
         ['Alaska', 'AK'],
@@ -237,34 +243,46 @@ function convertNames(input, to) {
         ['Wyoming', 'WY'],
     ];
 
-    var regions = states.concat(states);
+    var regions = states.concat(states); // concatenate to single array 
     
 
-    var i; // Reusable loop variable
+    var i; 
+    // to find the state code given state name 
     if (to == TO_ABBREVIATED) {
-        input = input.toUpperCase();
-        input = input.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+        input = input.toUpperCase(); // convert to upper case 
+        // for every word in the string , convert the first Character to uppercase and the rest of them to lowercase.
+        input = input.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); }); // Convert the first character into upper case 
         for (i = 0; i < regions.length; i++) {
+          // check if state name is in the arrat 
             if (regions[i][0] == input) {
+              // return the state code 
                 return (regions[i][1]);
             }
         }
-    } else if (to == TO_NAME) {
-        input = input.toUpperCase();
+    } 
+    // to find state name if user inputs state code 
+    else if (to == TO_NAME) {
+        input = input.toUpperCase(); //convert to uppercase 
         for (i = 0; i < regions.length; i++) {
+          // Check if the state code is in the array 
             if (regions[i][1] == input) {
+              //  return state name 
                 return (regions[i][0]);
             }
         }
     }
+    // return null if the statename or statecode is not found
     return null;
 }
 /* END OF DEEPA's CODE */
+
+
+
 /* CODE OF MAP STARTS HERE CODED BY - DYRAVUTH YORN */
 const token =
-  "pk.eyJ1Ijoia2lsbGJlZXZvbDIiLCJhIjoiY2twdndpanZ0MHltZjJ2b2lhNmp3Y2k3cCJ9.ZxtIFLMKwODb0Cp2ZfIcDw";
+  "pk.eyJ1Ijoia2lsbGJlZXZvbDIiLCJhIjoiY2twdndpanZ0MHltZjJ2b2lhNmp3Y2k3cCJ9.ZxtIFLMKwODb0Cp2ZfIcDw"; // api key 
 
-const myMap = L.map("mapid");
+const myMap = L.map("mapid"); //Map Object 
 
 // access mapbox api to get map image and show it in the map div
 L.tileLayer(
@@ -324,12 +342,18 @@ var searchApi = function (state) {
     var dead = filteredCities[i].dead || 0;
     var latitude = filteredCities[i].latitude;
     var longitude = filteredCities[i].longitude;
-    var location = filteredCities[i].location;
+    // var location = filteredCities[i].location;
+    var city = filteredCities[i].location.split(",")[0];
+    var state = filteredCities[i].location.split(",")[1] || "";
+   
 
-    myMap.setView([latitude, longitude], 5);
+    
 
-    // creating circles markers to place on map of searched city
-    var circle = L.circle([latitude, longitude], {
+    if (state.toLowerCase().trim() === search.toLowerCase().trim()) {
+      myMap.setView([latitude, longitude], 5);
+
+ // creating circles markers to place on map of searched city
+      const circle = L.circle([latitude, longitude], {
       color: "red",
       fillColor: "#f03",
       fillOpacity: 0.5,
@@ -339,7 +363,7 @@ var searchApi = function (state) {
     // information pop for marker when clicked
     circle.bindPopup(
       "<span class='stateName'>" +
-        location +
+        city +
         "</span><hr>Confirmed cases " +
         cases +
         "<br>Death " +
@@ -348,6 +372,7 @@ var searchApi = function (state) {
     markers.push(circle);
 
   }
+ }
   return;
   
 }
