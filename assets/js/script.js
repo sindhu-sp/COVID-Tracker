@@ -63,25 +63,28 @@ function searchApi(event) {
     var dead = filteredCities[i].dead;
     var latitude = filteredCities[i].latitude;
     var longitude = filteredCities[i].longitude;
-    var location = filteredCities[i].location;
+    var city = filteredCities[i].location.split(",")[0];
+    var state = filteredCities[i].location.split(",")[1] || "";
 
-    myMap.setView([latitude, longitude], 5);
-    // create circles markers to place on map of searched city
-    var circle = L.circle([latitude, longitude], {
-      color: "red",
-      fillColor: "#f03",
-      fillOpacity: 0.5,
-      radius: 8000,
-    }).addTo(myMap);
-    // information pop for marker when clicked
-    circle.bindPopup(
-      "<span class='stateName'>" +
-        location +
-        "</span><hr>Confirmed cases " +
-        cases +
-        "<br>Death " +
-        dead
-    );
-    markers.push(circle);
+    if (state.toLowerCase().trim() === search) {
+      myMap.setView([latitude, longitude], 5);
+      // create circles markers to place on map of searched city
+      var circle = L.circle([latitude, longitude], {
+        color: "red",
+        fillColor: "#f03",
+        fillOpacity: 0.5,
+        radius: 8000,
+      }).addTo(myMap);
+      // information pop for marker when clicked
+      circle.bindPopup(
+        "<span class='stateName'>" +
+          city +
+          "</span><hr>Confirmed cases " +
+          cases +
+          "<br>Death " +
+          dead
+      );
+      markers.push(circle);
+    }
   }
 }
