@@ -1,8 +1,8 @@
 /* COVID DATA FETCH FOR STATE NAME , LOCAL STORAGE AND MAPPING - DEEPA KRISHNAN */
 var searchFormEl = document.getElementById("search-form"); // form element for handling events
-var stateInputEl = document.getElementById("state-name"); // user input state name 
-var buttonContainerEl =document.querySelector("#state-buttons"); // container for the serch history buttons
-var stateSelectedEl =document.querySelector("#search-state"); //  displaying the state selected in main  page 
+var stateInputEl = document.getElementById("state-name"); // user input state name
+var buttonContainerEl = document.querySelector("#state-buttons"); // container for the serch history buttons
+var stateSelectedEl = document.querySelector("#search-state"); //  displaying the state selected in main  page
 var covidDataContainerEl = document.querySelector("#covid-data");
 var chosenStateName; //variable to store state name 
 //Array of objects to store  state name in local storage 
@@ -181,25 +181,29 @@ var buttonClickHandler =function (event){
     let i= 0;
     while (i<stateNameArr.length){
     if (event.target.innerHTML == stateNameArr[i]) //check if the event.target element name matches with state name in Local storage, 
-       { var stateClicked = event.target.innerHTML ;
-        // do mapping to display map 
-        var convertedName = convertNames(stateClicked,TO_NAME);
-       if(convertedName == null) {
-          convertedName = convertNames(stateClicked, TO_ABBREVIATED);
-           searchApi(stateClicked); // get the map info of the button clicked 
-           getStateInfo(convertedName); // get the state info 
-        }
-        else {// If abbrevaation is saved 
-          searchApi(convertedName); //  convert to statename and call Searchapi to display map
-          getStateInfo(stateClicked);  //call stateinfo 
-        }
-        //get the state  info and display
-        break;   
+       { 
+          var stateClicked = event.target.innerHTML ;
+          // do mapping to display map 
+          var convertedName = convertNames(stateClicked,TO_NAME);
+        if(convertedName == null) {
+            convertedName = convertNames(stateClicked, TO_ABBREVIATED);
+            searchApi(stateClicked); // get the map info of the button clicked 
+            getStateInfo(convertedName); // get the state info 
+          }
+          else {// If abbrevaation is saved 
+            searchApi(convertedName); //  convert to statename and call Searchapi to display map
+            getStateInfo(stateClicked);  //call stateinfo 
+          }
+          //get the state  info and display
+          break;   
       }
       i++;
     }
-};
-buttonContainerEl.addEventListener("click", buttonClickHandler);  //Eventlistener for Serach history buttons 
+    i++;
+  }
+
+
+buttonContainerEl.addEventListener("click", buttonClickHandler); //Eventlistener for Serach history buttons
 
 const TO_NAME = 1;
 const TO_ABBREVIATED = 2;
@@ -347,7 +351,7 @@ var searchApi = function (state) {
   // Grabs text value, convert to lowercase and removes whitespace from both ends.
   const search = state.toLowerCase().trim();
 
-    // filtering globalCities for search results and storing into filteredCities
+  // filtering globalCities for search results and storing into filteredCities
   filteredCities = globalCities.filter(
     (city) =>
       city.location.toLowerCase().search(search) > -1 &&
@@ -360,7 +364,9 @@ var searchApi = function (state) {
       }
       markers = [];
     }
-    // for loop adding data when clicked
+    markers = [];
+  }
+  // for loop adding data when clicked
   for (let i = 0; i < filteredCities.length; i++) {
     var cases = filteredCities[i].confirmed || 0;
     var dead = filteredCities[i].dead || 0;
@@ -383,7 +389,7 @@ var searchApi = function (state) {
       fillOpacity: 0.5,
       radius: 8000,
     }).addTo(myMap);
-    
+
     // information pop for marker when clicked
     circle.bindPopup(
       "<span class='stateName'>" +
@@ -394,9 +400,7 @@ var searchApi = function (state) {
         dead
     );
     markers.push(circle);
-
   }
- }
+//  }
   return;
-  
-}
+};
