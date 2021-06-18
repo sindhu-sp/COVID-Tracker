@@ -107,10 +107,14 @@ var displayCovidData= function(chosenStateName, data)
 // modal function
 function modalDisplay () {
   
+  
   var modalEl = document.querySelector(".modal");
+  console.log(modalEl);
   var modalBg = document.querySelector(".modal-background");
+  console.log(modalBg);
   modalEl.classList.add("is-active");
-  modalBg.addEventListener("click",() => {
+  modalBg.addEventListener("click",(e) => {
+    e.preventDefault();
     modalEl.classList.remove("is-active");
   });
 };
