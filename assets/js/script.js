@@ -8,21 +8,18 @@ var chosenStateName; //variable to store state name
 //Array of objects to store  state name in local storage 
 var stateNameArr = JSON.parse(localStorage.getItem("state")) ||[];
 
-const alertButtonEl = document.querySelector("#error-alert");
+// const alertButtonEl = document.querySelector("#error-alert");
 /* END OF  VARIABLE DECLARATION */
 
 //modal 
-
 const modalEl = document.querySelector(".modal")
 const modalBgEl =document.querySelector(".modal-background")
 var popupError=function() 
 {
   modalEl.classList.remove("hide");
-        modalEl.classList.add("is-active");
+  modalEl.classList.add("is-active");
   
 }
-
-
 
 modalEl.addEventListener("click",()=>
 {
@@ -44,7 +41,7 @@ var displayButtons = function()
     if(stateArr != null) {
     for ( let i=0;i<stateArr.length; i++){
          var buttonEl = document.createElement("button"); // create a button element 
-            buttonEl.className ="btn";
+            buttonEl.className ="button";
         buttonEl.innerHTML =stateArr[i] ; // Add the state name 
         buttonContainerEl.appendChild(buttonEl); // append to search history button container 
      }

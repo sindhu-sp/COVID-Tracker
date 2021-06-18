@@ -49,7 +49,8 @@
     
         <main class="flex-row justify-space-between">
             <!-- SIDE BAR  -->
-            <div class="col-12 col-md-4">
+            <!-- <div class="col-12 col-md-4"> -->
+                <div class="column is-one-quarter">
                 <!-- heading search by state  -->
                 <div class= "card">
                     <h4 class ="card-header">Enter State Name</h4>
@@ -70,23 +71,24 @@
                 </div>
             </div>
             <!-- END OF SIDE BAR  -->
-            <div class="col-12 col-md-8  ">   
-                <h4><span id="search-state"></span></h4>   
-                <div class= "modal hide">
+            <div class="column is-one-half flex-row">                  
+                <!-- <div  class = "column is-one-half" >    -->
+                    <div class= "column" id="mapid"> </div>     
+                    <h4><span id="search-state"></span></h4>                                       
+            </div>
+            <div class =" column is-one-quarter covidinfo"id ="covid-data"> </div>
+
+                    
+            <div class= "modal hide">
                         <div class="modal-background" ></div>
                         <div class="modal-content has-background-white py-3 px-4 ">
-                        <h5 class="title mb-6 ">Alert</h5>
-                        <p>Enter a Valid state name</p>
-                        <!-- <button class="modal-close is-large" aria-label="close" id ="error-alert"></button>  -->
-                    </div>
-                </div>
-                <div  class = "row flex-row justify-space-between" >   
-                    <div class= "col-7" id="mapid"> </div>                                         
-                  <div class =" col-4 card-body covidinfo"id ="covid-data">
-                        
-                    <div>
-                </div>
+                            <h5 class="title mb-6 ">Alert</h5>
+                            <p>Enter a Valid state name</p>
+                        </div>
             </div>
+                
+                        
+               
                                  
         </main>  
     </body>
