@@ -163,7 +163,7 @@ p {
 }
 
 .card-header {
-  color: var(--primary);
+  color: var(--light-dark);
   background-color: var(--dark);
   padding: 2.5%;
   border-radius: calc(.18rem - 1px) calc(.18rem - 1px) 0 0;
@@ -539,14 +539,15 @@ font-size:.5em ;
 }
 #mapid {
   height: 70vh;
-  width: 70%;
 }
 
 .stateName {
   font-size: larger;
   font-weight: bolder;
 }
-#covid-data{
+#covid-data,
+.covidinfo{
+ 
   font-weight: bold;
-  padding: 0px;
+  
 }

@@ -3,6 +3,8 @@ var stateInputEl = document.getElementById("state-name"); // user input state na
 var buttonContainerEl =document.querySelector("#state-buttons"); // container for the serch history buttons
 var stateSelectedEl =document.querySelector("#search-state"); //  displaying the state selected in main  page 
 var covidDataContainerEl = document.querySelector("#covid-data");
+// import BulmaNotification from './bulma-notifications.js';
+// let notif = new BulmaNotification();
 
 var chosenStateName; //variable to store state name 
 //Array of objects to store  state name in local storage 
@@ -29,7 +31,7 @@ var displayButtons = function()
     if(stateArr != null) {
     for ( let i=0;i<stateArr.length; i++){
          var buttonEl = document.createElement("button");
-            buttonEl.className ="btn";
+            buttonEl.className ="button";
         buttonEl.innerHTML =stateArr[i] ;
         buttonContainerEl.appendChild(buttonEl);
      }
@@ -67,39 +69,52 @@ var displayCovidData= function(chosenStateName, data)
     stateSelectedEl.innerHTML =chosenStateName+ " Last updated: "+ thisDate;
 
     var populationEl =document.createElement("p");
-    populationEl.innerHTML="Population: "+data.population; //population of the State 
+    populationEl.innerHTML="Population:"+data.population; //population of the State 
     covidDataContainerEl.appendChild(populationEl);
 
     var positivecaseEl =document.createElement("p");
-    positivecaseEl.innerHTML="Tested Positive: " + data.actuals.positiveTests; //tested positive admitted plus non -admitted cases 
+    positivecaseEl.innerHTML="Tested Positive:" + data.actuals.positiveTests; //tested positive admitted plus non -admitted cases 
     covidDataContainerEl.appendChild(positivecaseEl);
 
     var casesEl =document.createElement("p");
-    casesEl.innerHTML= "Hospitalized: "+ data.actuals.cases // admittend in the hospital 
+    casesEl.innerHTML= "Hospitalzed:"+ data.actuals.cases // admittend in the hospital 
     covidDataContainerEl.appendChild(casesEl);
 
     var newcaseEl =document.createElement("p");
-    newcaseEl.innerHTML ="New Cases: "+ data.actuals.newCases; //Daily new cases is the number of new COVID cases per day per unit of population 100k
+    newcaseEl.innerHTML =" New Cases:"+ data.actuals.newCases; //Daily new cases is the number of new COVID cases per day per unit of population 100k
     covidDataContainerEl.appendChild(newcaseEl);
 
     var recentdeathsEl =document.createElement("p");
-    recentdeathsEl.innerHTML="Deaths: " + data.actuals.newDeaths;
+    recentdeathsEl.innerHTML="Deaths:" + data.actuals.newDeaths;
     covidDataContainerEl.appendChild(recentdeathsEl);
 
     var vaccineEl = document.createElement("p");
-    vaccineEl.innerHTML="Vaccines Administered: " + data.actuals.vaccinesAdministered; // No of people who have been vaccinated or  had their first does of vaccine.
+    vaccineEl.innerHTML="Vaccines Administered:" + data.actuals.vaccinesAdministered; // No of people who have been vaccinated or  had their first does of vaccine.
     covidDataContainerEl.appendChild(vaccineEl);
 
     var icuEL = document.createElement("p");
-    icuEL.innerHTML = "ICU cases: "+ data.actuals.icuBeds.currentUsageCovid;
+    icuEL.innerHTML = "ICU Cases:"+ data.actuals.icuBeds.currentUsageCovid;
     covidDataContainerEl.appendChild(icuEL);
 
     var linkEl = document.createElement("a");
     linkEl.innerHTML ="Click here for more info"
     linkEl.setAttribute("href",data.url);
+    linkEl.setAttribute("class","covidinfo");
     covidDataContainerEl.appendChild(linkEl);
  
 };
+
+// modal function
+function modalDisplay () {
+  
+  var modalEl = document.querySelector(".modal");
+  var modalBg = document.querySelector(".modal-background");
+  modalEl.classList.add("is-active");
+  modalBg.addEventListener("click",() => {
+    modalEl.classList.remove("is-active");
+  });
+};
+
 var getStateInfo = function(state){
     if ( state != "undefined" ){
     
@@ -116,13 +131,17 @@ var getStateInfo = function(state){
         });
     }
     else {
-        alert(' invalid name ');   
-        document.location.replace("./index.html");
+        //  alert(' invalid name ');   
+        // notif.show("Invalid name", "danger", 5000);
+        // modal function call
+        modalDisplay();
+        // document.location.replace("./index.html");
         return; 
     } 
      })  
      .catch(function(error) {
         alert("Unable to connect");
+        // notif.show("Unable to connect", "danger", 5000);
       }) ;
     }
     return;
@@ -140,17 +159,18 @@ var formSubmitHandler = function(event) {
         convertedName = convertNames(chosenStateName, TO_ABBREVIATED);
          console.log(convertedName);
          searchApi(chosenStateName);
-        getStateInfo(convertedName);
+        getStateInfo(convertedName.toUpperCase());
        }
        else {
          searchApi(convertedName);
          console.log(chosenStateName);
-         getStateInfo(chosenStateName); 
+         getStateInfo(chosenStateName.toUpperCase()); 
        }
        console.log(convertedName);
         stateInputEl.value = ""; 
       } else {
         alert("Please enter a state name");
+        //  modalDisplay();
       }
       return;
   };
@@ -255,6 +275,7 @@ function convertNames(input, to) {
 
     var i; // Reusable loop variable
     if (to == TO_ABBREVIATED) {
+        input = input.toUpperCase();
         input = input.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
         for (i = 0; i < regions.length; i++) {
             if (regions[i][0] == input) {
@@ -332,26 +353,13 @@ var searchApi = function (state) {
     }
     // for loop adding data when clicked
   for (let i = 0; i < filteredCities.length; i++) {
-    var cases = filteredCities[i].confirmed;
-    var dead = filteredCities[i].dead;
+    var cases = filteredCities[i].confirmed || 0;
+    var dead = filteredCities[i].dead || 0;
     var latitude = filteredCities[i].latitude;
     var longitude = filteredCities[i].longitude;
     var location = filteredCities[i].location;
 
     myMap.setView([latitude, longitude], 5);
-
-    // L.tileLayer(
-    //   `https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${token}`,
-    //   {
-    //     attribution:
-    //       'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    //     maxZoom: 18,
-    //     id: "mapbox/streets-v11",
-    //     tileSize: 512,
-    //     zoomOffset: -1,
-    //     accessToken: token,
-    //   }
-    // ).addTo(myMap);
 
     // creating circles markers to place on map of searched city
     var circle = L.circle([latitude, longitude], {
@@ -376,3 +384,13 @@ var searchApi = function (state) {
   return;
   
 }
+
+// var modalDisplay = function() {
+  
+//   var modalEl = document.querySelector(".modal");
+//   var modalBg = document.querySelector(".modal-background");
+//   modalEl.classList.add("is-active");
+//   modalBg.addEventListener("click",() => {
+//     modalEl.classList.remove("is-active");
+//   });
+// };
