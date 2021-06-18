@@ -8,8 +8,28 @@ var chosenStateName; //variable to store state name
 //Array of objects to store  state name in local storage 
 var stateNameArr = JSON.parse(localStorage.getItem("state")) ||[];
 
-var alertboxEl = document.querySelector("#error-alert");
+const alertButtonEl = document.querySelector("#error-alert");
 /* END OF  VARIABLE DECLARATION */
+
+//modal 
+
+const modalEl = document.querySelector(".modal")
+const modalBgEl =document.querySelector(".modal-background")
+var popupError=function() 
+{
+  modalEl.classList.remove("hide");
+        modalEl.classList.add("is-active");
+  
+}
+
+
+
+modalEl.addEventListener("click",()=>
+{
+  modalEl.classList.remove("is-active");
+
+})
+
 
 // Display search history button 
 var displayButtons = function()
@@ -107,13 +127,14 @@ var getStateInfo = function(state){
         });
     }
     else {
-        alert(' invalid name ');   
+      popupError();   
         document.location.replace("./index.html"); // load the homepage 
         return; 
     } 
      })  
      .catch(function(error) {
-        alert("Unable to connect");
+      popupError();
+
       }) ;
     }
     return;
@@ -131,7 +152,9 @@ var formSubmitHandler = function(event) {
             convertedName = convertNames(chosenStateName, TO_ABBREVIATED); //call function to get statename 
             //Check if the abbrevation returned null as well 
             if(convertedName == null) {
-              alert("Please enter a valid state name");  // If so its an invalid user input 
+              // alert("Please enter a valid state name");  // If so its an invalid user input 
+              popupError();
+
             }
             else {
               // If user input is state name 
@@ -146,8 +169,9 @@ var formSubmitHandler = function(event) {
          }
          stateInputEl.value = ""; 
     } else {
-          //  alert("Please enter a  valid state name"); // throw error 
-          alertboxEl.classList.remove("hide");
+         
+          popupError();
+         
     }
     
       return;
