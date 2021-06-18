@@ -7,6 +7,8 @@ var covidDataContainerEl = document.querySelector("#covid-data");
 var chosenStateName; //variable to store state name 
 //Array of objects to store  state name in local storage 
 var stateNameArr = JSON.parse(localStorage.getItem("state")) ||[];
+
+var alertboxEl = document.querySelector("#error-alert");
 /* END OF  VARIABLE DECLARATION */
 
 // Display search history button 
@@ -144,7 +146,8 @@ var formSubmitHandler = function(event) {
          }
          stateInputEl.value = ""; 
     } else {
-          alert("Please enter a  valid state name"); // throw error 
+          //  alert("Please enter a  valid state name"); // throw error 
+          alertboxEl.classList.remove("hide");
     }
     
       return;
