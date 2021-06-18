@@ -177,6 +177,16 @@ var buttonClickHandler = function (event) {
     }
     i++;
   }
+  //modal
+  const modalEl = document.querySelector(".modal");
+  const modalBgEl = document.querySelector(".modal-background");
+  var popupError = function () {
+    modalEl.classList.remove("hide");
+    modalEl.classList.add("is-active");
+  };
+  modalEl.addEventListener("click", () => {
+    modalEl.classList.remove("is-active");
+  });
 };
 buttonContainerEl.addEventListener("click", buttonClickHandler); //Eventlistener for Serach history buttons
 
