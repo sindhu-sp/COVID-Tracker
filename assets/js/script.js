@@ -4,6 +4,7 @@ var stateInputEl = document.getElementById("state-name"); // user input state na
 var buttonContainerEl = document.querySelector("#state-buttons"); // container for the serch history buttons
 var stateSelectedEl = document.querySelector("#search-state"); //  displaying the state selected in main  page
 var covidDataContainerEl = document.querySelector("#covid-data");
+<<<<<<< HEAD
 var chosenStateName; //variable to store state name
 //Array of objects to store  state name in local storage
 var stateNameArr = JSON.parse(localStorage.getItem("state")) || [];
@@ -12,10 +13,41 @@ var stateNameArr = JSON.parse(localStorage.getItem("state")) || [];
 // Display search history button
 var displayButtons = function () {
   var stateArr = stateNameArr;
+=======
+var chosenStateName; //variable to store state name 
+//Array of objects to store  state name in local storage 
+var stateNameArr = JSON.parse(localStorage.getItem("state")) ||[];
+
+// const alertButtonEl = document.querySelector("#error-alert");
+/* END OF  VARIABLE DECLARATION */
+
+//modal 
+const modalEl = document.querySelector(".modal")
+const modalBgEl =document.querySelector(".modal-background")
+var popupError=function() 
+{
+  modalEl.classList.remove("hide");
+  modalEl.classList.add("is-active");
+  
+}
+
+modalEl.addEventListener("click",()=>
+{
+  modalEl.classList.remove("is-active");
+
+})
+
+
+// Display search history button 
+var displayButtons = function()
+{
+    var stateArr= stateNameArr;
+>>>>>>> 9c2a06635244d234abc295e9ca5635c4c653e677
 
   while (buttonContainerEl.lastChild != null) {
     // remove previous  children
     buttonContainerEl.removeChild(buttonContainerEl.lastChild);
+<<<<<<< HEAD
   }
   // refresh the button list
   if (stateArr != null) {
@@ -24,6 +56,19 @@ var displayButtons = function () {
       buttonEl.className = "btn";
       buttonEl.innerHTML = stateArr[i]; // Add the state name
       buttonContainerEl.appendChild(buttonEl); // append to search history button container
+=======
+    } 
+    // refresh the button list 
+    if(stateArr != null) {
+    for ( let i=0;i<stateArr.length; i++){
+         var buttonEl = document.createElement("button"); // create a button element 
+            buttonEl.className ="button";
+        buttonEl.innerHTML =stateArr[i] ; // Add the state name 
+        buttonContainerEl.appendChild(buttonEl); // append to search history button container 
+     }
+     if(stateArr.length)
+        document.querySelector("#state-list").classList.remove("hide"); //display the button element container  
+>>>>>>> 9c2a06635244d234abc295e9ca5635c4c653e677
     }
     if (stateArr.length)
       document.querySelector("#state-list").classList.remove("hide"); //display the button element container
@@ -101,6 +146,7 @@ var getStateInfo = function (state) {
       state +
       ".json?apiKey=a70af13784c14287ae753ec51cf42a65";
     fetch(apiURL)
+<<<<<<< HEAD
       .then(function (response) {
         // If promise is fullfilled
         if (response.ok) {
@@ -143,6 +189,62 @@ var formSubmitHandler = function (event) {
     else {
       searchApi(convertedName); // call the map function with name  converted from state code
       getStateInfo(chosenStateName.toUpperCase()); //call thr state info function
+=======
+    .then(function(response) {
+    // If promise is fullfilled 
+    if(response.ok){
+        response.json().then(function(data) {
+            displayCovidData(state,data);  // Call display function to display data in HTML 
+            saveInLocalStorage(state);     // save state name in local storage                   
+        });
+    }
+    else {
+      popupError();   
+        document.location.replace("./index.html"); // load the homepage 
+        return; 
+    } 
+     })  
+     .catch(function(error) {
+      popupError();
+
+      }) ;
+    }
+    return;
+}
+// Event handler when user submits the state name     
+var formSubmitHandler = function(event) {
+    
+    event.preventDefault(); 
+    chosenStateName = stateInputEl.value.trim(); // remove spaces 
+      chosenStateName.toUpperCase(); //convert to uppercase 
+      if (chosenStateName) {    
+          var convertedName = convertNames(chosenStateName,TO_NAME); // call function to get Abbrevation 
+          // If return value is null
+          if(convertedName == null) {
+            convertedName = convertNames(chosenStateName, TO_ABBREVIATED); //call function to get statename 
+            //Check if the abbrevation returned null as well 
+            if(convertedName == null) {
+              // alert("Please enter a valid state name");  // If so its an invalid user input 
+              popupError();
+
+            }
+            else {
+              // If user input is state name 
+              searchApi(chosenStateName); // call the map function to display map with state name 
+              getStateInfo(convertedName.toUpperCase()); // call the state info with abbrevation
+            }
+         }
+         // if user input is  state code 
+         else {
+          searchApi(convertedName); // call the map function with name  converted from state code 
+          getStateInfo(chosenStateName.toUpperCase());  //call thr state info function 
+         }
+         stateInputEl.value = ""; 
+    } else {
+         
+          popupError();
+         
+>>>>>>> 9c2a06635244d234abc295e9ca5635c4c653e677
     }
     stateInputEl.value = "";
   } else {
@@ -153,6 +255,7 @@ var formSubmitHandler = function (event) {
 };
 searchFormEl.addEventListener("submit", formSubmitHandler);
 // History button clicks handlers
+<<<<<<< HEAD
 var buttonClickHandler = function (event) {
   event.preventDefault();
   event.target.getAttribute("innerHTML"); // get the text of the button that was clicked
@@ -171,12 +274,36 @@ var buttonClickHandler = function (event) {
         // If abbrevaation is saved
         searchApi(convertedName); //  convert to statename and call Searchapi to display map
         getStateInfo(stateClicked); //call stateinfo
+=======
+var buttonClickHandler =function (event){
+    event.preventDefault();
+    event.target.getAttribute("innerHTML"); // get the text of the button that was clicked 
+    let i= 0;
+    while (i<stateNameArr.length){
+    if (event.target.innerHTML == stateNameArr[i]) //check if the event.target element name matches with state name in Local storage, 
+       { 
+          var stateClicked = event.target.innerHTML ;
+          // do mapping to display map 
+          var convertedName = convertNames(stateClicked,TO_NAME);
+        if(convertedName == null) {
+            convertedName = convertNames(stateClicked, TO_ABBREVIATED);
+            searchApi(stateClicked); // get the map info of the button clicked 
+            getStateInfo(convertedName); // get the state info 
+          }
+          else {// If abbrevaation is saved 
+            searchApi(convertedName); //  convert to statename and call Searchapi to display map
+            getStateInfo(stateClicked);  //call stateinfo 
+          }
+          //get the state  info and display
+          break;   
+>>>>>>> 9c2a06635244d234abc295e9ca5635c4c653e677
       }
       //get the state  info and display
       break;
     }
     i++;
   }
+<<<<<<< HEAD
   //modal
   const modalEl = document.querySelector(".modal");
   const modalBgEl = document.querySelector(".modal-background");
@@ -188,6 +315,10 @@ var buttonClickHandler = function (event) {
     modalEl.classList.remove("is-active");
   });
 };
+=======
+
+
+>>>>>>> 9c2a06635244d234abc295e9ca5635c4c653e677
 buttonContainerEl.addEventListener("click", buttonClickHandler); //Eventlistener for Serach history buttons
 
 const TO_NAME = 1;
@@ -361,6 +492,7 @@ var searchApi = function (state) {
 
       // creating circles markers to place on map of searched city
       const circle = L.circle([latitude, longitude], {
+<<<<<<< HEAD
         color: "red",
         fillColor: "#f03",
         fillOpacity: 0.5,
@@ -379,5 +511,25 @@ var searchApi = function (state) {
       markers.push(circle);
     }
   }
+=======
+      color: "red",
+      fillColor: "#f03",
+      fillOpacity: 0.5,
+      radius: 8000,
+    }).addTo(myMap);
+
+    // information pop for marker when clicked
+    circle.bindPopup(
+      "<span class='stateName'>" +
+        city +
+        "</span><hr>Confirmed cases " +
+        cases +
+        "<br>Death " +
+        dead
+    );
+    markers.push(circle);
+  }
+//  }
+>>>>>>> 9c2a06635244d234abc295e9ca5635c4c653e677
   return;
 };
