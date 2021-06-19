@@ -518,7 +518,7 @@ header {
   top :0;
   position: -webkit-sticky;
   position: sticky;
-  z-index: 10000;
+  z-index: 2;
 }
 
 header h1 {
@@ -539,6 +539,7 @@ font-size:.5em ;
 }
 #mapid {
   height: 70vh;
+  z-index: 2;
 }
 
 .stateName {
@@ -551,3 +552,13 @@ font-size:.5em ;
   font-weight: bold;
   
 }
+ tr, td {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: left;
+  font-family:monospace;
+  background-color: whitesmoke;
+}
+/* td {
+  border:none;
+} */
