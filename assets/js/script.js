@@ -48,9 +48,33 @@ var displayButtons = function()
         buttonEl.innerHTML =stateArr[i] ; // Add the state name 
         buttonContainerEl.appendChild(buttonEl); // append to search history button container 
      }
-     if(stateArr.length)
+     if(stateArr.length){
         document.querySelector("#state-list").classList.remove("hide"); //display the button element container  
-    }
+        var clearBtn = document.createElement("button");
+      clearBtn.className = "clear-btn";
+      clearBtn.id = "clear-button";
+      buttonEl.classList.add("is-outlined");
+    
+      clearBtn.setAttribute("type", "click");
+      clearBtn.innerHTML = "CLEAR";
+      // attach eventlistener function that will remove things fromlocalstorage
+      clearBtn.addEventListener("click", function () {
+        // remove from localstrage
+        localStorage.removeItem("state");
+        // reset the state array in memory to empty array
+        stateNameArr = [];
+        // remove existing buttons from recent searches container
+        while (buttonContainerEl.lastChild != null) {
+          // remove previous  children
+          buttonContainerEl.removeChild(buttonContainerEl.lastChild);
+        }
+        document.querySelector("#state-list").classList.add("hide");
+      });
+      buttonContainerEl.appendChild(clearBtn);
+    
+    
+      }
+  }
 }
 
 // Save state names in Local storage 
