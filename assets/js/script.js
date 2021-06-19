@@ -33,7 +33,6 @@ var displayButtons = function()
 
 // Save state names in Local storage 
 var saveInLocalStorage =function(state){
-    console.log(localStorage);
     stateNameArr.push(state);
     // Making sure the state name is not repeated , we convert it into a Set element
     stateNameArr = [...new Set(stateNameArr)]; // Use Set datatype to store non-repetitive data 
