@@ -7,26 +7,23 @@ var covidDataContainerEl = document.querySelector("#covid-data");
 var chosenStateName; //variable to store state name 
 //Array of objects to store  state name in local storage 
 var stateNameArr = JSON.parse(localStorage.getItem("state")) ||[];
-
-// const alertButtonEl = document.querySelector("#error-alert");
 /* END OF  VARIABLE DECLARATION */
 
-//modal 
+//modal code by SINDHU PILLAI
 const modalEl = document.querySelector(".modal")
 const modalBgEl =document.querySelector(".modal-background")
+// alert when there is an error 
 var popupError=function() 
 {
   modalEl.classList.remove("hide");
   modalEl.classList.add("is-active");
-  
 }
 
 modalEl.addEventListener("click",()=>
 {
   modalEl.classList.remove("is-active");
-
 })
-
+/* END OF SINDHU"S CODE */
 
 // Display search history button 
 var displayButtons = function()
@@ -351,11 +348,8 @@ function convertNames(input, to) {
         ['Wisconsin', 'WI'],
         ['Wyoming', 'WY'],
     ];
-
     var regions = states.concat(states); // concatenate to single array 
-    
-
-    var i; 
+    var i;  // initialize variable for  for loop
     // to find the state code given state name 
     if (to == TO_ABBREVIATED) {
         input = input.toUpperCase(); // convert to upper case 
@@ -385,13 +379,14 @@ function convertNames(input, to) {
 }
 /* END OF DEEPA's CODE */
 
-
-
 /* CODE OF MAP STARTS HERE CODED BY - DYRAVUTH YORN */
 const token =
   "pk.eyJ1Ijoia2lsbGJlZXZvbDIiLCJhIjoiY2twdndpanZ0MHltZjJ2b2lhNmp3Y2k3cCJ9.ZxtIFLMKwODb0Cp2ZfIcDw"; // api key 
-
 const myMap = L.map("mapid"); //Map Object 
+// creating variables for storing data
+const globalCities = [];
+let filteredCities = [];
+let markers = [];
 
 // access mapbox api to get map image and show it in the map div
 L.tileLayer(
@@ -406,12 +401,6 @@ L.tileLayer(
     accessToken: token,
   }
 ).addTo(myMap);
-
-
-// creating variables for storing data
-const globalCities = [];
-let filteredCities = [];
-let markers = [];
 
 // Getting information for cities worldwide
 fetch(`https://www.trackcorona.live/api/cities`)
@@ -431,7 +420,6 @@ var searchApi = function (state) {
 
   // Grabs text value, convert to lowercase and removes whitespace from both ends.
   const search = state.toLowerCase().trim();
-
     // filtering globalCities for search results and storing into filteredCities
   filteredCities = globalCities.filter(
     (city) =>
@@ -454,9 +442,6 @@ var searchApi = function (state) {
     // var location = filteredCities[i].location;
     var city = filteredCities[i].location.split(",")[0];
     var state = filteredCities[i].location.split(",")[1] || "";
-   
-
-    
 
     if (state.toLowerCase().trim() === search.toLowerCase().trim()) {
       myMap.setView([latitude, longitude], 5);

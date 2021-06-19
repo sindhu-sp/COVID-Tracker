@@ -22,7 +22,6 @@
       href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
       rel="stylesheet"
     />
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" /> -->
 
     <link rel="stylesheet" href="./assets/css/style1.css" />
     <link
@@ -38,7 +37,7 @@
     crossorigin=""
   ></script>
 
-    <title>COVID Tracker</title>
+    <title class =" title has-text-centered">COVID-Tracker</title>
 </head>
 <body class="flex-column min-100-vh" onload="displayButtons();">
     <!-- Heading  -->
@@ -71,29 +70,19 @@
             </div>
             <!-- END OF SIDE BAR  -->
             <div  class = " column is-one-half" >   
-                <!-- <h4><span id="search-state"></span></h4>    -->
                 <div class= "column " id="mapid"> </div>   
                 <h4><span id="search-state"></span></h4>   
-
-            </div>         
-                                       
-              <table class =" column is-one-quarter covidinfo"id ="covid-data">
-
-              </table>      
-           
-                    
-              <div class="modal hide">
-                <div class="modal-background"></div>
-                <div class="modal-content modal-sm has-background-white py-2 px-is3by4 ">
-                  <h5 class="title has-text-centered">Alert</h5>
-                  <h6 class = "has-text-centered">Enter a Valid state name</h6>
+            </div>                                                
+            <table class =" column is-one-quarter covidinfo"id ="covid-data"> 
+            </table>                           
+            <div class="modal hide">
+                <div class="modal-background">
+                  <div class="modal-content modal-sm has-background-white py-2 px-is3by4 ">
+                    <h5 class="title has-text-centered">Error!!</h5>
+                    <h6 class = "has-text-centered">Enter a Valid state name</h6>
+                  </div>
                 </div>
-              </div>
-            </div>
-                
-                        
-               
-                                 
+            </div>            
         </main>  
     </body>
 <script src="https://code.jquery.com/jquery-3.5.0.min.js"
