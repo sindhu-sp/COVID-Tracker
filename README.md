@@ -34,7 +34,7 @@ The following things are incorporated in this application:
 ![Webpage](https://github.com/Deeparkrish/COVID-Tracker/blob/main/assets/img/mapping.jpg)
 
 ## Mockup
-![Webpage](https://github.com/Deeparkrish/COVID-Tracker/blob/main/assets/img/mockup1.png)
+![Webpage](https://github.com/Deeparkrish/COVID-Tracker/blob/main/assets/img/mockup2.png)
 ## Challenges:
 * Initially,the project was intented to provide,the tourism information of a state of user's choice, along with the current COVID conditions 
   in that destination. A free travel API endpoint that would satify our requirment was something that was not feasible.
