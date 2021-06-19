@@ -2,15 +2,20 @@
 var searchFormEl = document.getElementById("search-form"); // form element for handling events
 var stateInputEl = document.getElementById("state-name"); // user input state name
 var buttonContainerEl = document.querySelector("#state-buttons"); // container for the search history buttons
-var stateSelectedEl = document.querySelector("#search-state"); //  displaying the state selected in main  page
+var stateSelectedEl = document.querySelector("#search-state"); //  displaying the state selected in main page
 var covidDataContainerEl = document.querySelector("#covid-data");
 var chosenStateName; //variable to store state name
 //Array of objects to store  state name in local storage
 var stateNameArr = JSON.parse(localStorage.getItem("state")) || [];
 
-// const alertButtonEl = document.querySelector("#error-alert");
+const clearButtonEl = document.querySelector("#clear-button");
 /* END OF  VARIABLE DECLARATION */
-
+// when clear button is clicked the local storage is cleared and the page reloaded if the user wants
+var clearHistory = function () {
+  // event.preventDefault();
+  localStorage.clear();
+};
+clearButtonEl.addEventListener("click", clearHistory());
 //modal
 const modalEl = document.querySelector(".modal");
 const modalBgEl = document.querySelector(".modal-background");
@@ -41,6 +46,7 @@ var displayButtons = function () {
     }
     if (stateArr.length)
       document.querySelector("#state-list").classList.remove("hide"); //display the button element container
+    document.querySelector(".clearbtn").classList.remove("hide");
   }
 };
 
