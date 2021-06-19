@@ -59,7 +59,9 @@
         <div class="card">
           <form id="search-form">
             <div class="field">
-              <label class="label">Enter State Name</label>
+              <label class="label" style="font-family: monospace"
+                >Enter State Name</label
+              >
               <input
                 name="statename"
                 id="state-name"
@@ -68,13 +70,21 @@
                 placeholder="state name"
                 class="form-input"
               />
-              <button class="button is-success" type="submit">Search</button>
+              <button
+                class="button is-success"
+                type="submit"
+                style="font-family: monospace; justify-content: center"
+              >
+                Search
+              </button>
             </div>
           </form>
         </div>
         <div id="state-list" class="card hide">
           <!-- create a card layout of buttons in a div , each button with an id or data-obj -->
-          <h4 class="card-header">Recently Searched</h4>
+          <h4 class="card-header" style="font-family: monospace">
+            Recently Searched
+          </h4>
           <div class="card-body flex-column" id="state-buttons">
             <!-- State buttons  to be dynamically added based on search  -->
           </div>
