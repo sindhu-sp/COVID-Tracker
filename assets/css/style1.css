@@ -34,6 +34,10 @@
     line-height: 1.25;
   }
   
+/* #mapid {
+    z-index: 2;
+} */
+
   main {
     margin: 20px auto;
     width: 94%;
@@ -539,6 +543,7 @@
   }
   #mapid {
     height: 70vh;
+    z-index: 2;
   }
   
   .stateName {
