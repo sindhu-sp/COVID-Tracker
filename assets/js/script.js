@@ -389,12 +389,3 @@ var searchApi = function (state) {
   
 }
 
-// var modalDisplay = function() {
-  
-//   var modalEl = document.querySelector(".modal");
-//   var modalBg = document.querySelector(".modal-background");
-//   modalEl.classList.add("is-active");
-//   modalBg.addEventListener("click",() => {
-//     modalEl.classList.remove("is-active");
-//   });
-// };
