@@ -146,7 +146,7 @@ var displayCovidData= function(chosenStateName, data)
     // no of coivd patients admittedin ICU
     var icuEL = document.createElement("tr");
     var icuTitleEl =document.createElement("td");
-    icuELTitle.innerHTML = "ICU Cases";  
+    icuTitleEl.innerHTML = "ICU Cases";  
     icuEL.appendChild(icuTitleEl);
     var icuDataEl =document.createElement("td");
     icuDataEl.innerHTML =data.actuals.icuBeds.currentUsageCovid;
@@ -154,13 +154,18 @@ var displayCovidData= function(chosenStateName, data)
     covidDataContainerEl.appendChild(icuEL);
 
     // url  for more data 
-    var urEl = document.createElement("tr")
+    var urlEl = document.createElement("tr")
+    var urlTitleEl = document.createElement("td");
+    urlTitleEl.innerHTML ="More info"
+    urlEl.appendChild(urlTitleEl);
+    var urlDataEl =document.createElement("td")
     var linkEl = document.createElement("a");
-    linkEl.innerHTML ="Click here for more info"
+    linkEl.innerHTML ="Click here "
     linkEl.setAttribute("href",data.url); // Link to detailed report 
     linkEl.setAttribute("class","covidinfo");
-    urEl.appendChild(linkEl);
-    covidDataContainerEl.appendChild(urEl);
+    urlDataEl.appendChild(linkEl);
+    urlEl.appendChild(urlDataEl);
+    covidDataContainerEl.appendChild(urlEl);
 
 };
 
