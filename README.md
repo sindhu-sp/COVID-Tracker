@@ -46,7 +46,6 @@ The following things are incorporated in this application:
 *   The site would include the main points of interests of the chosen state that are open for public.
 *   The site would also provide latest news data of the state.
 *   More data to be displayed on the map’s pop ups.
-*   Adding a Clear button.
 
 ## Data Endpoints 
  *  https://apidocs.covidactnow.org
@@ -70,3 +69,6 @@ https://deeparkrish.github.io/COVID-Tracker/
 Made with ❤️ by  Deepa Krishnan, Dyravuth Yorn, Sindhu Pillai, Timothy Sepulvada
 
 
+## Portfolio
+* This project has been added to my portfolio. 
+file:///Users/deepakrishnan/Mycode/ChallengeRepo/MyPortfolio/index.html
