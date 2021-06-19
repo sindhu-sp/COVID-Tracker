@@ -23,6 +23,7 @@ The following things are incorporated in this application:
 * The application is responsive and has a clean interface.
 *  An open-source JavaScript library, https://leafletjs.com/  has been used to create the interactive map.
 
+
 ## Flow diagram 
 ![Webpage](https://github.com/Deeparkrish/COVID-Tracker/blob/main/assets/img/flowchart.jpg)
 ## Wireframe
@@ -60,7 +61,8 @@ The following things are incorporated in this application:
 * Server-side APIs
 * https://leafletjs.com/ -An open-source JavaScript library 
 * Styling - Bulma(TBD)
-
+## Project presentation slides 
+https://docs.google.com/presentation/d/1ia0NJDtdqY7EU2dx1q3VCHI1G2FQHgY1z-Bmmlgtpyw/edit?usp=sharing
 ## Website
 https://deeparkrish.github.io/COVID-Tracker/
 
