@@ -15,7 +15,7 @@ var clearHistory = function () {
   // event.preventDefault();
   localStorage.clear();
 };
-clearButtonEl.addEventListener("click", clearHistory());
+//clearButtonEl.addEventListener("click", clearHistory());
 //modal
 const modalEl = document.querySelector(".modal");
 const modalBgEl = document.querySelector(".modal-background");
@@ -30,6 +30,9 @@ modalEl.addEventListener("click", () => {
 
 // Display search history button
 var displayButtons = function () {
+  //   <div class="clearbtn hide">
+  //   <button class="button" id="clear-button" type="click"></button>
+  // </div>
   var stateArr = stateNameArr;
 
   while (buttonContainerEl.lastChild != null) {
@@ -44,9 +47,29 @@ var displayButtons = function () {
       buttonEl.innerHTML = stateArr[i]; // Add the state name
       buttonContainerEl.appendChild(buttonEl); // append to search history button container
     }
-    if (stateArr.length)
-      document.querySelector("#state-list").classList.remove("hide"); //display the button element container
-    document.querySelector(".clearbtn").classList.remove("hide");
+    if (stateArr.length) {
+      document.querySelector("#state-list").classList.remove("hide");
+      // create delete button and assign attributes to it
+      var clearBtn = document.createElement("button");
+      clearBtn.className = "clear-btn";
+      clearBtn.id = "clear-button";
+      clearBtn.setAttribute("type", "click");
+      clearBtn.innerHTML = "reset";
+      // attach eventlistener function that will remove things fromlocalstorage
+      clearBtn.addEventListener("click", function () {
+        // remove from localstrage
+        localStorage.removeItem("state");
+        // reset the state array in memory to empty array
+        stateNameArr = [];
+        // remove existing buttons from recent searches container
+        while (buttonContainerEl.lastChild != null) {
+          // remove previous  children
+          buttonContainerEl.removeChild(buttonContainerEl.lastChild);
+        }
+      });
+      buttonContainerEl.appendChild(clearBtn);
+    }
+    //document.querySelector(".clearbtn").classList.remove("hide");
   }
 };
 
@@ -58,6 +81,7 @@ var saveInLocalStorage = function (state) {
   stateNameArr = [...new Set(stateNameArr)]; // Use Set datatype to store non-repetitive data
   localStorage.setItem("state", JSON.stringify(stateNameArr));
   // Display recently searched states
+
   displayButtons();
 };
 //Display Data on HTML

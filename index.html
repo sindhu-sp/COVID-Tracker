@@ -68,7 +68,7 @@
                 placeholder="state name"
                 class="form-input"
               />
-              <button class="button is-primary" type="submit">Search</button>
+              <button class="button is-success" type="submit">Search</button>
             </div>
           </form>
         </div>
@@ -78,9 +78,9 @@
           <div class="card-body flex-column" id="state-buttons">
             <!-- State buttons  to be dynamically added based on search  -->
           </div>
-          <div class="clearbtn hide">
+          <!-- <div class="clearbtn hide">
             <button class="button" id="clear-button" type="click"></button>
-          </div>
+          </div> -->
         </div>
       </div>
       <!-- END OF SIDE BAR  -->
@@ -89,8 +89,13 @@
         <div class="column" id="mapid"></div>
         <h4><span id="search-state"></span></h4>
       </div>
-      <div class="column is-one-quarter covidinfo" id="covid-data"></div>
-
+      <div class="column is-one-quarter">
+        <div class="card">
+          <div class="card-content">
+            <div class="column content" id="covid-data"></div>
+          </div>
+        </div>
+      </div>
       <div class="modal hide">
         <div class="modal-background"></div>
         <div class="modal-content has-background-white py-3 px-4">
