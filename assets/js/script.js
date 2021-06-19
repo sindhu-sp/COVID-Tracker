@@ -42,6 +42,9 @@ var displayButtons = function()
     for ( let i=0;i<stateArr.length; i++){
          var buttonEl = document.createElement("button"); // create a button element 
             buttonEl.className ="button";
+            buttonEl.classList.add("is-dark");
+
+            buttonEl.classList.add("is-outlined");
         buttonEl.innerHTML =stateArr[i] ; // Add the state name 
         buttonContainerEl.appendChild(buttonEl); // append to search history button container 
      }
