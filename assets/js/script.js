@@ -42,6 +42,9 @@ var displayButtons = function()
     for ( let i=0;i<stateArr.length; i++){
          var buttonEl = document.createElement("button"); // create a button element 
             buttonEl.className ="button";
+            buttonEl.classList.add("is-dark");
+
+            buttonEl.classList.add("is-outlined");
         buttonEl.innerHTML =stateArr[i] ; // Add the state name 
         buttonContainerEl.appendChild(buttonEl); // append to search history button container 
      }
@@ -52,14 +55,20 @@ var displayButtons = function()
 
 // Save state names in Local storage 
 var saveInLocalStorage =function(state){
-    if (stateNameArr.length >=5) stateNameArr.shift(); // Pop the state name  in the first index out of the array
-    stateNameArr.push(state);
-    // Making sure the state name is not repeated , we convert it into a Set element
-    stateNameArr = [...new Set(stateNameArr)]; // Use Set datatype to store non-repetitive data 
-    localStorage.setItem("state",JSON.stringify(stateNameArr));  
-    // Display recently searched states 
-    displayButtons();   
+  console.log(localStorage);
+  stateNameArr.push(state);
+  // Making sure the state name is not repeated , we convert it into a Set element
+  stateNameArr = [...new Set(stateNameArr)]; // Use Set datatype to store non-repetitive data 
+
+  // use > 5 to limit to 5 states in search history
+  // Do this check after duplicates have been removed - duplicate scenario happens when a search button is clicked
+  if (stateNameArr.length >5) stateNameArr.shift(); // Pop the state name  in the first index out of the array
+  localStorage.setItem("state",JSON.stringify(stateNameArr));  
+  // Display recently searched states 
+  displayButtons();
+   
 }
+
 //Display Data on HTML 
 var displayCovidData= function(chosenStateName, data) 
 {
@@ -74,39 +83,89 @@ var displayCovidData= function(chosenStateName, data)
     var thisDate =data.lastUpdatedDate; //Current date
     stateSelectedEl.innerHTML =chosenStateName+ " Last updated: "+ thisDate;
 
-    var populationEl =document.createElement("p");
-    populationEl.innerHTML="Population:"+data.population; //population of the State 
+    //population of the State 
+    var populationEl =document.createElement("tr");
+    var popTitleEl =document.createElement("td");
+    popTitleEl.innerHTML ="Population"
+    var popDataEl =document.createElement("td");
+    popDataEl.innerHTML=data.population; 
+    populationEl.appendChild(popTitleEl);
+    populationEl.appendChild(popDataEl);
     covidDataContainerEl.appendChild(populationEl);
 
-    var positivecaseEl =document.createElement("p");
-    positivecaseEl.innerHTML="Tested Positive:" + data.actuals.positiveTests; //tested positive admitted plus non -admitted cases 
+    //tested positive admitted plus non -admitted cases 
+    var positivecaseEl =document.createElement("tr");
+    var positivecaseTitleEl =document.createElement("td");
+    positivecaseTitleEl.innerHTML="Tested Positive";
+    positivecaseEl.appendChild(positivecaseTitleEl);
+    var positivecaseDataEl=document.createElement("td");
+    positivecaseDataEl.innerHTML= data.actuals.positiveTests; 
+    positivecaseEl.appendChild(positivecaseDataEl);
     covidDataContainerEl.appendChild(positivecaseEl);
 
-    var casesEl =document.createElement("p");
-    casesEl.innerHTML= "Hospitalzed:"+ data.actuals.cases // admittend in the hospital 
+     // admittend in the hospital 
+    var casesEl =document.createElement("tr");
+    var casesTitleEl = document.createElement("td");
+    casesTitleEl.innerHTML="Hospitalized";
+    casesEl.appendChild(casesTitleEl);
+    var casesDataEl =document.createElement("td");
+    casesDataEl.innerHTML=  data.actuals.cases;
+    casesEl.appendChild(casesDataEl);
     covidDataContainerEl.appendChild(casesEl);
 
-    var newcaseEl =document.createElement("p");
-    newcaseEl.innerHTML =" New Cases:"+ data.actuals.newCases; //Daily new cases is the number of new COVID cases per day per unit of population 100k
+    //Daily new cases is the number of new COVID cases per day per unit of population 100k
+    var newcaseEl =document.createElement("tr");
+    var newcaseTitleEl = document.createElement("td");
+    newcaseTitleEl.innerHTML="New Cases";
+    newcaseEl.appendChild(newcaseTitleEl);
+    var newcaseDataEl = document.createElement("td");
+    newcaseDataEl.innerHTML =data.actuals.newCases; 
+    newcaseEl.appendChild(newcaseDataEl);
     covidDataContainerEl.appendChild(newcaseEl);
 
-    var recentdeathsEl =document.createElement("p");
-    recentdeathsEl.innerHTML="Deaths:" + data.actuals.newDeaths;
+    // Current death cases 
+    var recentdeathsEl =document.createElement("tr");
+    var recentdeathsTitleEl =document.createElement("td");
+    recentdeathsTitleEl.innerHTML ="Deaths";
+    recentdeathsEl.appendChild(recentdeathsTitleEl);
+    var recentdeathsDataEl =document.createElement("td");
+    recentdeathsDataEl.innerHTML= data.actuals.newDeaths;
+    recentdeathsEl.appendChild(recentdeathsDataEl);
     covidDataContainerEl.appendChild(recentdeathsEl);
 
-    var vaccineEl = document.createElement("p");
-    vaccineEl.innerHTML="Vaccines Administered:" + data.actuals.vaccinesAdministered; // No of people who have been vaccinated or  had their first does of vaccine.
+       // No of people who have been vaccinated or  had their first does of vaccine.
+    var vaccineEl = document.createElement("tr");
+    var vaccineTitleEl =document.createElement("td");
+    vaccineTitleEl.innerHTML="Vaccines Administered" ;
+    vaccineEl.appendChild(vaccineTitleEl);
+    var vaccineDataEl =document.createElement("td");
+    vaccineDataEl.innerHTML=data.actuals.vaccinesAdministered;
+    vaccineEl.appendChild(vaccineDataEl);
     covidDataContainerEl.appendChild(vaccineEl);
 
-    var icuEL = document.createElement("p");
-    icuEL.innerHTML = "ICU Cases:"+ data.actuals.icuBeds.currentUsageCovid; // no of coivd patients admittedin ICU
+    // no of coivd patients admittedin ICU
+    var icuEL = document.createElement("tr");
+    var icuTitleEl =document.createElement("td");
+    icuTitleEl.innerHTML = "ICU Cases";  
+    icuEL.appendChild(icuTitleEl);
+    var icuDataEl =document.createElement("td");
+    icuDataEl.innerHTML =data.actuals.icuBeds.currentUsageCovid;
+    icuEL.appendChild(icuDataEl);
     covidDataContainerEl.appendChild(icuEL);
 
+    // url  for more data 
+    var urlEl = document.createElement("tr")
+    var urlTitleEl = document.createElement("td");
+    urlTitleEl.innerHTML ="More info"
+    urlEl.appendChild(urlTitleEl);
+    var urlDataEl =document.createElement("td")
     var linkEl = document.createElement("a");
-    linkEl.innerHTML ="Click here for more info"
+    linkEl.innerHTML ="Click here "
     linkEl.setAttribute("href",data.url); // Link to detailed report 
     linkEl.setAttribute("class","covidinfo");
-    covidDataContainerEl.appendChild(linkEl);
+    urlDataEl.appendChild(linkEl);
+    urlEl.appendChild(urlDataEl);
+    covidDataContainerEl.appendChild(urlEl);
 
 };
 
