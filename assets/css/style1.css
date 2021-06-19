@@ -163,7 +163,7 @@ p {
 }
 
 .card-header {
-  color: var(--primary);
+  color: var(--light-dark);
   background-color: var(--dark);
   padding: 2.5%;
   border-radius: calc(.18rem - 1px) calc(.18rem - 1px) 0 0;
@@ -518,7 +518,7 @@ header {
   top :0;
   position: -webkit-sticky;
   position: sticky;
-  z-index: 10000;
+  z-index: 2;
 }
 
 header h1 {
@@ -539,7 +539,7 @@ font-size:.5em ;
 }
 #mapid {
   height: 70vh;
-  /* width: 70%; */
+  z-index: 2;
 }
 
 .stateName {
@@ -548,7 +548,17 @@ font-size:.5em ;
 }
 #covid-data,
 .covidinfo{
-  padding:0;
+ 
   font-weight: bold;
   
 }
+ tr, td {
+  border: 1px solid black;
+  padding: 11px;
+  text-align: left;
+  font-family:monospace;
+  background-color: whitesmoke;
+}
+/* td {
+  border:none;
+} */

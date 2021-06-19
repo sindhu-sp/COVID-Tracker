@@ -10,6 +10,8 @@
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
@@ -20,7 +22,7 @@
       href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" /> -->
 
     <link rel="stylesheet" href="./assets/css/style1.css" />
     <link
@@ -46,7 +48,8 @@
     
         <main class="flex-row justify-space-between">
             <!-- SIDE BAR  -->
-            <div class="col-12 col-md-4">
+            <!-- <div class="col-12 col-md-4"> -->
+                <div class="column is-one-quarter">
                 <!-- heading search by state  -->
                 <div class= "card">
                     <h4 class ="card-header">Enter State Name</h4>
@@ -54,7 +57,7 @@
                     <div class= "card-body">
                         <form id="search-form" class="card-body">
                             <input name="statename" id="state-name" type="text" autofocus="true" placeholder ="state name" class="form-input" />
-                            <button  id = "search-btn" type="submit" class="btn"> <i class="fa fa-search"></i>Search</button>
+                            <button  id = "search-btn" type="submit" class="button is-dark"> <i class="fa fa-search"></i>Search</button>
                         </form>
                     </div>
                 </div>
@@ -67,15 +70,29 @@
                 </div>
             </div>
             <!-- END OF SIDE BAR  -->
-            <div class="col-12 col-md-8  ">   
-                <h4><span id="search-state"></span></h4>      
-                <div  class = "row flex-row justify-space-between" >   
-                    <div class= "col-7" id="mapid"> </div>                                         
-                  <div class =" col-4 card-body covidinfo"id ="covid-data">
-                        
-                    <div>
+            <div  class = " column is-one-half" >   
+                <!-- <h4><span id="search-state"></span></h4>    -->
+                <div class= "column " id="mapid"> </div>   
+                <h4><span id="search-state"></span></h4>   
+
+            </div>         
+                                       
+              <table class =" column is-one-quarter covidinfo"id ="covid-data">
+
+              </table>      
+           
+                    
+              <div class="modal hide">
+                <div class="modal-background"></div>
+                <div class="modal-content modal-sm has-background-white py-2 px-is3by4 ">
+                  <h5 class="title has-text-centered">Alert</h5>
+                  <h6 class = "has-text-centered">Enter a Valid state name</h6>
                 </div>
+              </div>
             </div>
+                
+                        
+               
                                  
         </main>  
     </body>
