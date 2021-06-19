@@ -52,7 +52,7 @@ var displayButtons = function()
 
 // Save state names in Local storage 
 var saveInLocalStorage =function(state){
-    if (stateNameArr.length >=5) stateNameArr.shift(); // Pop the state name  in the first index out of the array
+    if (stateNameArr.length >5) stateNameArr.shift(); // Pop the state name  in the first index out of the array
     stateNameArr.push(state);
     // Making sure the state name is not repeated , we convert it into a Set element
     stateNameArr = [...new Set(stateNameArr)]; // Use Set datatype to store non-repetitive data 
