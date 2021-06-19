@@ -70,5 +70,5 @@ Made with ❤️ by  Deepa Krishnan, Dyravuth Yorn, Sindhu Pillai, Timothy Sepul
 
 
 ## Portfolio
-* This project has been added to my portfolio. 
+* This project has been linked to our portfolio. 
 file:///Users/deepakrishnan/Mycode/ChallengeRepo/MyPortfolio/index.html
