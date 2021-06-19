@@ -52,13 +52,20 @@ var displayButtons = function()
 
 // Save state names in Local storage 
 var saveInLocalStorage =function(state){
-    if (stateNameArr.length >5) stateNameArr.shift(); // Pop the state name  in the first index out of the array
-    stateNameArr.push(state);
-    // Making sure the state name is not repeated , we convert it into a Set element
-    stateNameArr = [...new Set(stateNameArr)]; // Use Set datatype to store non-repetitive data 
-    localStorage.setItem("state",JSON.stringify(stateNameArr));  
-    // Display recently searched states 
-    displayButtons();   
+  console.log(localStorage);
+  stateNameArr.push(state);
+  // Making sure the state name is not repeated , we convert it into a Set element
+  stateNameArr = [...new Set(stateNameArr)]; // Use Set datatype to store non-repetitive data 
+
+  // use > 5 to limit to 5 states in search history
+  // Do this check after duplicates have been removed - duplicate scenario happens when a search button is clicked
+  if (stateNameArr.length >5) stateNameArr.shift(); // Pop the state name  in the first index out of the array
+
+  localStorage.setItem("state",JSON.stringify(stateNameArr));  
+
+  // Display recently searched states 
+  displayButtons();
+   
 }
 //Display Data on HTML 
 var displayCovidData= function(chosenStateName, data) 
