@@ -59,7 +59,7 @@ The following things are incorporated in this application:
 * Javascript
 * Server-side APIs
 * https://leafletjs.com/ -An open-source JavaScript library 
-* Styling - Bulma(TBD)
+* Styling - Bulma
 ## Project presentation slides 
 https://docs.google.com/presentation/d/1ia0NJDtdqY7EU2dx1q3VCHI1G2FQHgY1z-Bmmlgtpyw/edit?usp=sharing
 ## Website
