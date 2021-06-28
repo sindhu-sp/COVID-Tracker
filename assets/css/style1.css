@@ -4,7 +4,7 @@
   --tertiary: #788585;
   --light-dark: #6f6866;
   --dark: #38302e;
-  --border-radius: .3rem;
+  --border-radius: 0.3rem;
 }
 
 * {
@@ -12,7 +12,7 @@
 }
 
 body {
-  background-color:var(--primary);
+  background-color: var(--primary);
   /* #293251 */
   margin: 0;
   padding: 0;
@@ -43,9 +43,9 @@ p {
   font-size: 1.2rem;
 }
 
- .btn {
+.btn {
   font-size: 1.3rem;
-  text-decoration:none;
+  text-decoration: none;
   padding: 6px 5px;
   width: 100%;
   display: block;
@@ -59,7 +59,7 @@ p {
   transform: translate(-1px, -1px);
 }
 
- .btn:hover {
+.btn:hover {
   color: var(--primary);
   background-color: var(--tertiary);
   transform: translate(0, 0);
@@ -86,7 +86,7 @@ p {
   font-size: 1.2rem;
 }
 
- .btn-back:hover {
+.btn-back:hover {
   color: var(--primary);
   background-color: var(--tertiary);
   transform: translate(0, 0);
@@ -98,6 +98,9 @@ p {
   background-color: var(--dark);
   color: var(--primary);
   align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10000;
 }
 
 .hero p {
@@ -135,7 +138,7 @@ p {
 .status-icon {
   padding: 2px 5px;
   margin: 0 5px;
-  background-color: rgba(255,255,255, 1);
+  background-color: rgba(255, 255, 255, 1);
   border-radius: var(--border-radius);
 }
 
@@ -147,14 +150,14 @@ p {
   color: rgb(29, 153, 255);
 }
 .bg-amber {
-  background-color: rgb(255, 145, 0); 
+  background-color: rgb(255, 145, 0);
 }
 
 .bg-yellow {
   background-color: yellow;
 }
 .bg-purple {
-  background-color:rgb(137, 137, 228);
+  background-color: rgb(137, 137, 228);
 }
 /* CARDS */
 .card {
@@ -167,7 +170,7 @@ p {
   color: var(--light-dark);
   background-color: var(--dark);
   padding: 2.5%;
-  border-radius: calc(.18rem - 1px) calc(.18rem - 1px) 0 0;
+  border-radius: calc(0.18rem - 1px) calc(0.18rem - 1px) 0 0;
 }
 
 .card-body {
@@ -193,7 +196,6 @@ p {
   font-size: 1.2rem;
   border: 2px solid var(--light-dark);
   border-radius: var(--border-radius);
-  
 }
 
 /* HEIGHT / WIDTH UTILS */
@@ -209,7 +211,6 @@ p {
 .text-uppercase {
   text-transform: uppercase;
 }
-
 
 /* FLEX CONTENT */
 .flex-row {
@@ -232,7 +233,7 @@ p {
 }
 
 .justify-flex-start {
-  justify-content: flex-start
+  justify-content: flex-start;
 }
 
 .justify-flex-end {
@@ -357,7 +358,6 @@ p {
     flex: 0 0 100%;
   }
 }
-
 
 /* col-md */
 @media screen and (min-width: 768px) {
@@ -513,30 +513,30 @@ p {
 }
 
 header {
-  display:flex;
+  display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  top :0;
+  top: 0;
   position: -webkit-sticky;
   position: sticky;
   z-index: 2;
 }
 
 header h1 {
- padding : 5px;
-  font-size: 20px; 
-  color:whitesmoke;
+  padding: 5px;
+  font-size: 20px;
+  color: whitesmoke;
   font-style: italic;
 }
 .hide {
-display:none;
+  display: none;
 }
-.weather-widgets{
-background-color:var(--dark);
-border:none;
-color: whitesmoke;
-font-style: italic;
-font-size:.5em ;
+.weather-widgets {
+  background-color: var(--dark);
+  border: none;
+  color: whitesmoke;
+  font-style: italic;
+  font-size: 0.5em;
 }
 #mapid {
   height: 70vh;
@@ -548,15 +548,14 @@ font-size:.5em ;
   font-weight: bolder;
 }
 #covid-data,
-.covidinfo{
- 
+.covidinfo {
   font-weight: bold;
-  
 }
- tr, td {
+tr,
+td {
   border: 1px solid black;
   padding: 11px;
   text-align: left;
-  font-family:monospace;
+  font-family: monospace;
   background-color: whitesmoke;
 }
