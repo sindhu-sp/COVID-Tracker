@@ -98,7 +98,9 @@ p {
   background-color: var(--dark);
   color: var(--primary);
   align-items: center;
-  position: relative;
+  position: sticky;
+  top: 0px;
+  z-index: 10000;
 }
 
 .hero p {
