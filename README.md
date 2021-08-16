@@ -61,7 +61,8 @@ The following things are incorporated in this application:
 * https://leafletjs.com/ -An open-source JavaScript library 
 * Styling - Bulma
 ## Project presentation slides 
-https://docs.google.com/presentation/d/1ia0NJDtdqY7EU2dx1q3VCHI1G2FQHgY1z-Bmmlgtpyw/edit?usp=sharing
+https://docs.google.com/presentation/d/1oOb_olRWNmSIkgogbAvOWQYOuiJgInANzLCWE0ImRjY/edit#slide=id.ge0bc768e7c_2_69
+
 ## Website
 https://deeparkrish.github.io/COVID-Tracker/
 
