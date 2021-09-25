@@ -63,8 +63,8 @@ The following things are incorporated in this application:
 ## Project presentation slides 
 https://docs.google.com/presentation/d/1oOb_olRWNmSIkgogbAvOWQYOuiJgInANzLCWE0ImRjY/edit#slide=id.ge0bc768e7c_2_69
 
-## Website
-https://deeparkrish.github.io/COVID-Tracker/
+## Website 
+https://sindhu-sp.github.io/COVID-Tracker/
 
 ## Contribution
 Made with ❤️ by  Deepa Krishnan, Dyravuth Yorn, Sindhu Pillai, Timothy Sepulvada
