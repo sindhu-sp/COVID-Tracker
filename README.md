@@ -70,6 +70,3 @@ https://sindhu-sp.github.io/COVID-Tracker/
 Made with ❤️ by  Deepa Krishnan, Dyravuth Yorn, Sindhu Pillai, Timothy Sepulvada
 
 
-## Portfolio
-* This project has been linked to our portfolio. 
-https://deeparkrish.github.io/MyPortfolio/
